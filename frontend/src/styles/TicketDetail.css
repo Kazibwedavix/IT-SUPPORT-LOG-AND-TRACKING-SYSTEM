@@ -1,0 +1,321 @@
+.ticket-detail {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ticket-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.ticket-title-section h1 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.ticket-meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.status-badge, .urgency-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-open { background: #e3f2fd; color: #1976d2; }
+.status-in-progress { background: #fff3e0; color: #f57c00; }
+.status-resolved { background: #e8f5e8; color: #2e7d32; }
+.status-closed { background: #f5f5f5; color: #666; }
+
+.urgency-low { background: #e8f5e8; color: #2e7d32; }
+.urgency-medium { background: #fff3e0; color: #f57c00; }
+.urgency-high { background: #ffe0e0; color: #d32f2f; }
+.urgency-critical { background: #fce4ec; color: #c2185b; }
+
+.ticket-id {
+  color: #666;
+  font-size: 14px;
+}
+
+.ticket-detail-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.ticket-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.ticket-section h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.ticket-description {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.ticket-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-item strong {
+  color: #666;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* Comments */
+.comments-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.comment {
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background: #fafafa;
+}
+
+.comment.internal {
+  background: #fff3e0;
+  border-color: #ffb74d;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.internal-badge {
+  background: #ff9800;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+.comment-date {
+  color: #666;
+  font-size: 12px;
+}
+
+.comment-content {
+  line-height: 1.5;
+}
+
+.no-comments, .no-activities {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+.add-comment-form {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.form-check input[type="checkbox"] {
+  width: auto;
+}
+
+/* Admin Controls */
+.admin-controls .control-group {
+  margin-bottom: 20px;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.control-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.current-assignment {
+  padding: 10px;
+  background: #e8f5e8;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Activity Log */
+.activities-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.activity-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.activity-date {
+  color: #666;
+  font-size: 12px;
+}
+
+.activity-description {
+  color: #666;
+  font-size: 14px;
+}
+
+.activity-changes {
+  color: #007bff;
+  font-style: italic;
+}
+
+.error-container {
+  text-align: center;
+  padding: 40px;
+}
+
+@media (max-width: 768px) {
+  .ticket-detail-content {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-detail-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .ticket-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Loading and Error States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+}
+
+.error-container,
+.not-found {
+  max-width: 500px;
+  margin: 4rem auto;
+  padding: 3rem;
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+  border: 1px solid var(--color-border-light);
+}
+
+.error-content,
+.not-found-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.error-container h2,
+.not-found h2 {
+  color: var(--color-danger);
+  margin: 0;
+}
+
+.error-message {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.error-actions {
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: center;
+  margin-top: var(--spacing-4);
+}
+
+/* Comment Spinner */
+.comment-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: var(--spacing-2);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Internal Note Option */
+.internal-note-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.internal-note-option input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}

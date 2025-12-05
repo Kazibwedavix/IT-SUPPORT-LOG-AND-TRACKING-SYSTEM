@@ -1,0 +1,461 @@
+{"timestamp":"2025-12-02T19:01:59.010Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:01:59.021Z","type":"AUDIT","event":"SERVER_STARTED","port":"5003","environment":"production"}
+{"timestamp":"2025-12-02T19:01:59.057Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:02:00.022Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:02:31.661Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:02:51.525Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:02:51.533Z","type":"AUDIT","event":"SERVER_STARTED","port":"5003","environment":"production"}
+{"timestamp":"2025-12-02T19:02:51.567Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:02:51.936Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:09:52.682Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:09:52.691Z","type":"AUDIT","event":"SERVER_STARTED","port":"5004","environment":"production"}
+{"timestamp":"2025-12-02T19:09:52.742Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:09:53.390Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:10:46.676Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:11:16.055Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T19:11:16.061Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-02T20:16:04.491Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:16:04.504Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-02T20:16:04.572Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:16:04.744Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:16:33.612Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:16:33.737Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-02T20:16:35.299Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:16:46.475Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:16:46.485Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-02T20:16:46.527Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:16:46.649Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:35:36.187Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/auth/register","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-02T20:35:36.558Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/favicon.ico","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-02T20:36:47.215Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/auth/register","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-02T20:41:44.508Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:41:44.517Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-02T20:48:27.290Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:48:27.301Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-02T20:52:12.972Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T20:52:13.430Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T21:12:11.612Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T21:12:11.626Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-02T22:22:18.357Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T22:22:18.465Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-02T22:22:18.571Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T22:22:19.039Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-02T22:28:07.786Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T02:46:37.774Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T02:46:37.822Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T02:58:37.591Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T02:58:37.603Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T03:44:47.066Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T03:44:47.074Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T03:51:16.164Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T03:51:16.180Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T04:00:20.857Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T04:00:20.866Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T04:00:31.356Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T04:00:31.364Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T04:09:20.791Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T04:09:20.807Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T04:14:02.599Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"692fb907a00b19bb424da686","action":"REGISTER","resource":"USER","username":"test","email":"test@example.com","role":"student"}
+{"timestamp":"2025-12-03T04:16:18.152Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"692fb98fa00b19bb424da68c","action":"REGISTER","resource":"USER","username":"frontendtest","email":"frontend.test@example.com","role":"student"}
+{"timestamp":"2025-12-03T04:16:41.036Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"692fb9a6a00b19bb424da693","action":"REGISTER","resource":"USER","username":"invalidtest","email":"invalid.test@example.com","role":"student"}
+{"timestamp":"2025-12-03T04:17:12.427Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"692fb9c5a00b19bb424da699","action":"REGISTER","resource":"USER","username":"validationtest","email":"validation.test@example.com","role":"student"}
+{"timestamp":"2025-12-03T04:19:30.773Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T04:22:30.584Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T04:22:30.592Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T12:54:53.824Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T12:54:53.837Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T13:07:55.899Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"marlonpius163@gmail.com"}
+{"timestamp":"2025-12-03T13:08:26.304Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `it_services` is not a valid enum value for path `professionalInfo.department`.","email":"marlonpius163@gmail.com"}
+{"timestamp":"2025-12-03T13:12:01.883Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T13:12:01.891Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T13:12:04.221Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `it_services` is not a valid enum value for path `professionalInfo.department`.","email":"marlonpius163@gmail.com"}
+{"timestamp":"2025-12-03T13:15:15.923Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693037e02c8a2a1dab501ad1","action":"REGISTER","resource":"USER","username":"marlonpius163","email":"marlonpius163@gmail.com","role":"student"}
+{"timestamp":"2025-12-03T13:25:45.429Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T13:25:45.436Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T13:25:59.803Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693037e02c8a2a1dab501ad1","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-03T13:31:16.178Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"kazibwedavid689@gmail.com"}
+{"timestamp":"2025-12-03T13:33:07.275Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `facilities` is not a valid enum value for path `professionalInfo.department`.","email":"kazibwedavid698@gmail.com"}
+{"timestamp":"2025-12-03T13:33:29.184Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `research` is not a valid enum value for path `professionalInfo.department`.","email":"kazibwedavid698@gmail.com"}
+{"timestamp":"2025-12-03T13:48:39.160Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"kazibwedavid698@gmail.com"}
+{"timestamp":"2025-12-03T14:10:42.024Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"kazibwedavid698@gmail.com"}
+{"timestamp":"2025-12-03T14:11:52.960Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"kazibwedavid698@gmail.com"}
+{"timestamp":"2025-12-03T14:12:08.944Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T14:12:08.951Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T14:12:11.768Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"kazibwedavid698@gmail.com"}
+{"timestamp":"2025-12-03T14:48:57.444Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T14:48:57.451Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T14:58:13.859Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T14:58:13.867Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T15:14:12.571Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T15:14:12.581Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T15:29:14.814Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T15:29:14.825Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T15:31:00.048Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"joannakintu51@gmail.com"}
+{"timestamp":"2025-12-03T15:31:42.461Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"joannakintu51@gmail.com"}
+{"timestamp":"2025-12-03T15:32:10.180Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"joannakintu51@gmail.com"}
+{"timestamp":"2025-12-03T15:36:45.382Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T15:36:45.403Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T15:36:50.497Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User.findOne is not a function","email":"joannakintu51@gmail.com"}
+{"timestamp":"2025-12-03T15:39:29.775Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T15:39:29.788Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T15:41:33.484Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"joannakintu51@gmail.com"}
+{"timestamp":"2025-12-03T15:51:30.143Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T15:51:30.156Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T15:51:34.818Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"joannakintu51@gmail.com"}
+{"timestamp":"2025-12-03T16:02:45.842Z","type":"AUDIT","event":"REGISTRATION_ERROR","error":"User validation failed: professionalInfo.department: `administration` is not a valid enum value for path `professionalInfo.department`.","email":"kazibwedavid698@gmail.com"}
+{"timestamp":"2025-12-03T16:04:50.623Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T16:04:50.632Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T16:05:00.573Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69305fa7bee150f027e247e3","action":"REGISTER","resource":"USER","username":"kazibwedavid698","email":"kazibwedavid698@gmail.com","role":"technician"}
+{"timestamp":"2025-12-03T16:16:45.713Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T16:17:05.364Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T16:17:05.373Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T16:19:18.696Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69305fa7bee150f027e247e3","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-03T16:22:02.656Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693063a711e3cb151ce07455","action":"REGISTER","resource":"USER","username":"kazibwedavid050","email":"kazibwedavid050@gmail.com","role":"admin"}
+{"timestamp":"2025-12-03T16:22:33.055Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693063a711e3cb151ce07455","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-03T16:39:31.571Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T16:39:31.582Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T16:40:16.091Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T16:40:16.099Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T16:40:42.946Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T16:40:42.959Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T16:42:27.084Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T16:42:27.091Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-03T16:50:56.707Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-03T16:50:56.718Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T06:08:12.448Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693125432b985af6fd6e2f21","action":"REGISTER","resource":"USER","username":"kazibwedavid063","email":"kazibwedavid063@gmail.com","role":"staff"}
+{"timestamp":"2025-12-04T06:10:41.337Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693125df2b985af6fd6e2f27","action":"REGISTER","resource":"USER","username":"kazibwedavid698","email":"kazibwedavid698@gmail.com","role":"staff"}
+{"timestamp":"2025-12-04T06:11:07.550Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693125df2b985af6fd6e2f27","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T06:16:36.457Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T06:16:36.466Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T06:18:17.060Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T06:18:17.074Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T06:19:25.987Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693127ea4604c4d77aa4bd59","action":"REGISTER","resource":"USER","username":"kazibwedavix11","email":"kazibwedavix11@gmail.com","role":"admin"}
+{"timestamp":"2025-12-04T06:19:42.335Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693127ea4604c4d77aa4bd59","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T06:27:37.901Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693129d74604c4d77aa4bd62","action":"REGISTER","resource":"USER","username":"kazibwedavix11","email":"kazibwedavix11@gmail.com","role":"admin"}
+{"timestamp":"2025-12-04T06:27:49.122Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"693129d74604c4d77aa4bd62","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T06:39:47.216Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312caa4604c4d77aa4bd6b","action":"REGISTER","resource":"USER","username":"kazibwedavix11","email":"kazibwedavix11@gmail.com","role":"admin"}
+{"timestamp":"2025-12-04T06:39:58.587Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312caa4604c4d77aa4bd6b","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T06:46:46.662Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312e544604c4d77aa4bd74","action":"REGISTER","resource":"USER","username":"kazibwedavix11","email":"kazibwedavix11@gmail.com","role":"admin"}
+{"timestamp":"2025-12-04T06:46:59.178Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312e544604c4d77aa4bd74","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T06:47:46.981Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T06:47:46.994Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T06:48:30.556Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T06:48:30.588Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T06:49:20.626Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312eed8af902e314a241f0","action":"REGISTER","resource":"USER","username":"kazibwedavix11","email":"kazibwedavix11@gmail.com","role":"admin"}
+{"timestamp":"2025-12-04T06:49:31.198Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312eed8af902e314a241f0","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T06:50:05.974Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312eed8af902e314a241f0","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T06:51:27.723Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312f6d8af902e314a241fc","action":"REGISTER","resource":"USER","username":"kazibwedavix11","email":"kazibwedavix11@gmail.com","role":"admin"}
+{"timestamp":"2025-12-04T06:51:36.753Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312f6d8af902e314a241fc","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T06:52:26.950Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"REGISTER","resource":"USER","username":"kazibwedavix11","email":"kazibwedavix11@gmail.com","role":"admin"}
+{"timestamp":"2025-12-04T06:52:33.623Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T06:52:47.503Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T06:53:39.703Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:02:31.923Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:02:31.947Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:03:18.702Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:03:18.709Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:03:47.613Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:03:47.640Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:04:20.640Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:04:20.672Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:04:42.675Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:04:42.687Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:05:08.846Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:05:09.515Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:05:09.544Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:06:11.895Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:06:12.311Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:06:12.416Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:06:12.469Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:06:12.594Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:06:43.131Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:06:43.142Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:06:53.675Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:06:54.287Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:06:54.298Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:10:10.491Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:10:10.498Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:12:38.371Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:12:38.389Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:14:19.265Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:14:19.668Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:14:19.698Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:14:19.734Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:14:19.820Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:16:01.903Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931352c574ff646d194c273","action":"REGISTER","resource":"USER","username":"kazibwedavid698","email":"kazibwedavid698@gmail.com","role":"student"}
+{"timestamp":"2025-12-04T07:16:30.589Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931352c574ff646d194c273","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T07:16:49.852Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931352c574ff646d194c273","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:16:50.185Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/api/tickets","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:16:50.353Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/api/tickets","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:20:53.035Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:20:53.045Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:21:58.660Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:21:59.007Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:21:59.121Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:21:59.157Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:33:32.620Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931394103633f5c9e40edc0","action":"REGISTER","resource":"USER","username":"kazibwedavix050","email":"kazibwedavix050@gmail.com","role":"staff"}
+{"timestamp":"2025-12-04T07:44:57.249Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:44:57.261Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:45:06.082Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:45:06.383Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:45:06.407Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:45:06.424Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:45:06.430Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:47:35.710Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:47:35.718Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:48:20.449Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:48:20.732Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:48:20.780Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:48:20.802Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:48:20.814Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:49:08.060Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T07:49:08.666Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:49:08.705Z","type":"AUDIT","event":"ERROR","method":"GET","path":"/api/users/admin/system-stats","statusCode":404,"errorCode":"INTERNAL_ERROR","message":"ENOENT: no such file or directory, stat 'C:\\Users\\KADZ-TECH\\Documents\\dev\\it-support-system\\frontend\\build\\index.html'","userId":null,"userRole":null,"ip":"::1","userAgent":"Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36","query":{},"body":{},"params":{}}
+{"timestamp":"2025-12-04T07:50:25.393Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:50:25.421Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:50:35.550Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:50:35.557Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:50:57.068Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:52:39.066Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:52:39.108Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:55:55.800Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T07:55:55.811Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T07:57:45.726Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T08:27:42.974Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T08:27:42.980Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T08:32:23.299Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T08:32:23.307Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T08:38:55.127Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T08:38:55.363Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T08:41:57.384Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T08:47:56.412Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69314ab4bbe0a09c2bcfaa90","action":"REGISTER","resource":"USER","username":"kazibwedavid060","email":"kazibwedavid060@gmail.com","role":"student"}
+{"timestamp":"2025-12-04T08:49:29.382Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69314b17bbe0a09c2bcfaa96","action":"REGISTER","resource":"USER","username":"kazibwedavid050","email":"kazibwedavid050@gmail.com","role":"student"}
+{"timestamp":"2025-12-04T08:49:45.429Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69314b17bbe0a09c2bcfaa96","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T08:50:14.117Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T08:50:14.122Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T08:52:24.801Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T08:52:24.809Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T08:54:04.759Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69314b17bbe0a09c2bcfaa96","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T09:11:48.593Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T09:11:48.602Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T09:13:57.425Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T09:13:57.435Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T09:14:13.684Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T09:14:13.691Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T09:32:34.286Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T09:32:34.298Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T09:35:59.787Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T09:35:59.807Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T09:36:17.908Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T09:36:17.918Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T09:43:53.830Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T09:43:53.839Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T09:44:32.105Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T09:44:32.541Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T09:44:32.650Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T09:44:32.719Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T09:44:32.763Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T09:56:31.307Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T09:56:31.315Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T09:56:34.288Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T09:56:34.625Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T09:56:34.635Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T09:56:34.822Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T09:56:34.833Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T11:22:51.499Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T11:22:51.718Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T11:22:51.751Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T11:22:51.823Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T11:22:51.864Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T11:39:59.687Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T11:39:59.701Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T11:40:26.272Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T11:40:26.293Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T11:41:41.502Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T11:41:41.511Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T11:43:06.376Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T11:43:06.388Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T11:45:57.037Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T11:45:57.050Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T11:46:11.819Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931747f71b470627ac84491","action":"REGISTER","resource":"USER","username":"joannakintu51","email":"joannakintu51@gmail.com","role":"technician"}
+{"timestamp":"2025-12-04T11:48:44.245Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931751971b470627ac84499","action":"REGISTER","resource":"USER","username":"kazibwedavid698","email":"kazibwedavid698@gmail.com","role":"technician"}
+{"timestamp":"2025-12-04T11:49:11.082Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931751971b470627ac84499","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T11:49:31.375Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931751971b470627ac84499","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T11:51:05.767Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T11:51:05.780Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T11:51:14.276Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931751971b470627ac84499","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T12:04:44.394Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T12:04:44.402Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T12:06:33.020Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T12:06:33.038Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T12:08:48.050Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T12:08:48.615Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T12:08:48.722Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T12:08:48.886Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T12:08:48.932Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T12:10:22.806Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T12:10:22.824Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T12:11:15.943Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T12:11:16.388Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T12:11:16.556Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T12:11:16.632Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T12:11:16.727Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T13:39:14.965Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931747f71b470627ac84491","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T13:39:47.935Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931747f71b470627ac84491","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T15:06:45.792Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931747f71b470627ac84491","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T15:07:15.233Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T15:07:15.241Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T15:07:39.849Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931747f71b470627ac84491","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T16:20:40.440Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T16:20:57.004Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T16:20:57.012Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T16:21:03.659Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T16:43:03.297Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T16:43:03.305Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T16:43:08.896Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T16:43:25.525Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T16:43:33.810Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T16:43:34.081Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T16:43:34.089Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T16:43:34.276Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T16:43:34.288Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T16:44:12.078Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931751971b470627ac84499","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T16:46:21.771Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931751971b470627ac84499","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T16:47:59.508Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T16:47:59.514Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T16:59:07.494Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69314b17bbe0a09c2bcfaa96","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-04T17:04:32.485Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T17:04:32.714Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:04:32.727Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:04:32.837Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:04:32.846Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:04:52.691Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T17:04:52.739Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T17:05:14.989Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T17:05:27.208Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T17:05:27.419Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:05:27.446Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:05:27.529Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:05:27.538Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:19:02.019Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T17:19:02.186Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:19:02.205Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:19:02.277Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:19:02.288Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:22:29.802Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T17:22:29.960Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:22:29.974Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:22:30.053Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:22:30.063Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:22:42.926Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T17:22:42.935Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T17:23:05.389Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T17:23:05.618Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:23:05.622Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:23:05.711Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:23:05.724Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:25:50.097Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T17:25:50.244Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:25:50.289Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:25:50.332Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:25:50.362Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:28:11.203Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T17:28:21.217Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T17:28:21.386Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:28:21.433Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:28:21.485Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:28:21.504Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:28:47.185Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:28:47.198Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:29:04.564Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:29:04.578Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:29:04.648Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:29:04.657Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:31:24.050Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T17:31:24.057Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T17:31:27.682Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T17:31:27.881Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:31:27.919Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:31:27.960Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T17:31:27.983Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T17:31:32.932Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T17:32:56.569Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"REGISTER","resource":"USER","username":"kazibwedavid698","email":"kazibwedavid698@gmail.com","role":"student"}
+{"timestamp":"2025-12-04T17:33:26.268Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T17:33:46.642Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T19:33:45.871Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T19:40:46.396Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T19:42:54.310Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931e43aa5629106200fff2d","action":"REGISTER","resource":"USER","username":"kazibwedavid050","email":"kazibwedavid050@gmail.com","role":"staff"}
+{"timestamp":"2025-12-04T20:03:30.690Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931e8fca5629106200fff35","action":"REGISTER","resource":"USER","username":"kazibwedavid050","email":"kazibwedavid050@gmail.com","role":"staff"}
+{"timestamp":"2025-12-04T20:05:43.385Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931e8fca5629106200fff35","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T20:11:14.865Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931e8fca5629106200fff35","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T20:12:24.761Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T20:12:25.322Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T20:12:25.349Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T20:12:25.564Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T20:12:25.577Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T20:13:04.020Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T20:17:46.304Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T20:30:18.498Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"REGISTER","resource":"USER","username":"kazibwedavid716","email":"kazibwedavid716@gmail.com","role":"technician"}
+{"timestamp":"2025-12-04T20:37:49.390Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T20:41:57.173Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T20:42:14.347Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T20:45:15.429Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T20:45:48.593Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-04T20:45:57.524Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"EMAIL_VERIFICATION","resource":"USER"}
+{"timestamp":"2025-12-04T20:46:42.825Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T20:47:29.982Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-04T20:47:49.579Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-04T20:53:15.055Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-04T20:53:15.065Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-04T20:53:47.564Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-04T20:53:47.977Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T20:53:48.043Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-04T20:53:48.190Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-04T20:53:48.228Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T04:55:40.098Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-05T04:55:40.106Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-05T04:56:10.635Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-05T04:56:10.884Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T04:56:10.889Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T04:56:10.964Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T04:56:10.973Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T04:56:34.693Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T04:56:34.715Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T04:56:48.454Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T04:56:48.463Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T04:56:48.532Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T04:56:48.536Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T04:56:58.708Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-05T04:59:49.080Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-05T05:00:41.797Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-05T05:01:36.704Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-05T05:01:59.767Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-05T05:05:26.411Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-05T05:14:05.097Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-05T05:14:05.104Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-05T09:06:08.992Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-05T09:06:09.027Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-05T09:07:03.237Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-05T09:18:33.826Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-05T09:18:33.838Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-05T09:25:36.929Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-05T09:25:37.378Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T09:25:37.464Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T09:25:37.566Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T09:25:37.613Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T09:39:42.928Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-05T09:39:42.938Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-05T09:52:16.391Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-05T09:54:39.135Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-05T09:54:52.901Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931c5bfa5629106200fff0d","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-05T14:16:53.149Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-05T16:52:37.476Z","type":"AUDIT","event":"DATABASE_CONNECTED","host":"127.0.0.1","database":"it-support-system"}
+{"timestamp":"2025-12-05T16:52:37.491Z","type":"AUDIT","event":"SERVER_STARTED","port":"5002","environment":"production"}
+{"timestamp":"2025-12-05T16:54:35.496Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931e8fca5629106200fff35","action":"PASSWORD_RESET_REQUEST","resource":"AUTH"}
+{"timestamp":"2025-12-05T16:55:49.737Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGIN","resource":"AUTH","ip":"::1"}
+{"timestamp":"2025-12-05T16:55:49.954Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T16:55:49.960Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T16:55:50.043Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_USER_STATS","resource":"USER"}
+{"timestamp":"2025-12-05T16:55:50.050Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"GET_SYSTEM_STATS","resource":"TICKET"}
+{"timestamp":"2025-12-05T16:57:14.818Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"69312fa88af902e314a24205","action":"LOGOUT","resource":"AUTH"}
+{"timestamp":"2025-12-05T16:57:38.540Z","type":"AUDIT","event":"USER_ACTIVITY","userId":"6931ef51a5629106200fff7d","action":"LOGIN","resource":"AUTH","ip":"::1"}

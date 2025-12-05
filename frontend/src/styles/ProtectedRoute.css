@@ -1,0 +1,93 @@
+/* ProtectedRoute Component Styles */
+
+.auth-loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-secondary);
+  z-index: var(--z-modal-backdrop);
+}
+
+/* Access Denied States (if you want to show a custom page) */
+.access-denied {
+  max-width: 500px;
+  margin: 4rem auto;
+  padding: 3rem;
+  text-align: center;
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--color-border-light);
+}
+
+.access-denied-icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-4);
+  color: var(--color-danger);
+}
+
+.access-denied h2 {
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-3);
+}
+
+.access-denied p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+  line-height: var(--line-height-normal);
+}
+
+.access-denied-actions {
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: center;
+  margin-top: var(--spacing-4);
+}
+
+/* Session expired warning */
+.session-expired {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa8 100%);
+  border: 1px solid #ffeaa8;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  text-align: center;
+}
+
+.session-expired p {
+  color: #856404;
+  margin: 0;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .auth-loading-container {
+    background: var(--color-bg-secondary);
+  }
+  
+  .access-denied {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-border-medium);
+  }
+  
+  .session-expired {
+    background: linear-gradient(135deg, #332701 0%, #4d3c00 100%);
+    border-color: #665600;
+  }
+  
+  .session-expired p {
+    color: #ffeaa8;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .auth-loading-container {
+    animation: none;
+  }
+}

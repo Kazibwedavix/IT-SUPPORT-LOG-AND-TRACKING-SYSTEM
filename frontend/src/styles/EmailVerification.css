@@ -1,0 +1,155 @@
+.email-verification-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.verification-card {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.verification-icon {
+  margin-bottom: 24px;
+}
+
+.verification-icon svg {
+  width: 64px;
+  height: 64px;
+}
+
+.verification-icon.success svg {
+  color: #10b981;
+}
+
+.verification-icon.error svg {
+  color: #ef4444;
+}
+
+.verification-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1f2937;
+}
+
+.verification-title.success {
+  color: #10b981;
+}
+
+.verification-title.error {
+  color: #ef4444;
+}
+
+.verification-message {
+  font-size: 16px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.verification-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.verification-actions .btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+}
+
+.verification-actions .btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.verification-actions .btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.verification-actions .btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.verification-actions .btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+.verification-actions .btn-outline {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+}
+
+.verification-actions .btn-outline:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.verification-footer {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 24px;
+  color: #6b7280;
+}
+
+.verification-footer a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.verification-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .email-verification-container {
+    padding: 16px;
+  }
+
+  .verification-card {
+    padding: 32px 24px;
+  }
+
+  .verification-title {
+    font-size: 24px;
+  }
+
+  .verification-actions {
+    flex-direction: column;
+  }
+
+  .verification-actions .btn {
+    width: 100%;
+  }
+}
+
+/* Loading animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.verification-icon svg.loading {
+  animation: spin 1s linear infinite;
+}

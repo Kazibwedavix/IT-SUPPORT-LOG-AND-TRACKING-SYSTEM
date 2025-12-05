@@ -1,0 +1,476 @@
+/* QuickActionCard Component Styles */
+.quick-action-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 100px;
+}
+
+.quick-action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  border-color: #007bff;
+}
+
+.quick-action-card:active {
+  transform: translateY(-1px);
+}
+
+/* Color Variants */
+.quick-action-card.primary:hover {
+  border-color: #007bff;
+}
+
+.quick-action-card.secondary:hover {
+  border-color: #6c757d;
+}
+
+.quick-action-card.success:hover {
+  border-color: #28a745;
+}
+
+.quick-action-card.danger:hover {
+  border-color: #dc3545;
+}
+
+.quick-action-card.warning:hover {
+  border-color: #ffc107;
+}
+
+.quick-action-card.info:hover {
+  border-color: #17a2b8;
+}
+
+/* Emergency Variant */
+.quick-action-card.emergency {
+  border-color: #dc3545;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+  border-width: 2px;
+}
+
+.quick-action-card.emergency:hover {
+  border-color: #dc3545;
+  background: #fff5f5;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.15);
+}
+
+.quick-action-card.emergency .action-icon {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.quick-action-card.emergency .action-arrow {
+  color: #dc3545;
+}
+
+/* Action Icon */
+.action-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.quick-action-card:hover .action-icon {
+  transform: scale(1.1);
+}
+
+/* Icon Color Variants */
+.quick-action-card.primary .action-icon {
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+}
+
+.quick-action-card.secondary .action-icon {
+  background: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+}
+
+.quick-action-card.success .action-icon {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.quick-action-card.danger .action-icon {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.quick-action-card.warning .action-icon {
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+}
+
+.quick-action-card.info .action-icon {
+  background: rgba(23, 162, 184, 0.1);
+  color: #17a2b8;
+}
+
+/* Action Content */
+.action-content {
+  flex: 1;
+  min-width: 0; /* Prevent text overflow */
+}
+
+.action-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+  display: block;
+}
+
+.action-description {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.4;
+  display: block;
+}
+
+/* Action Arrow */
+.action-arrow {
+  color: #adb5bd;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.quick-action-card:hover .action-arrow {
+  transform: translateX(4px);
+  color: #007bff;
+  opacity: 1;
+}
+
+.quick-action-card.emergency:hover .action-arrow {
+  color: #dc3545;
+}
+
+/* Link and Button Wrappers */
+.quick-action-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.quick-action-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+/* Disabled State */
+.quick-action-card.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.quick-action-card.disabled:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: #e9ecef;
+}
+
+.quick-action-card.disabled .action-icon {
+  background: #f8f9fa;
+  color: #adb5bd;
+}
+
+.quick-action-card.disabled .action-label {
+  color: #adb5bd;
+}
+
+.quick-action-card.disabled .action-description {
+  color: #ced4da;
+}
+
+/* Compact Variant */
+.quick-action-card.compact {
+  padding: 16px;
+  min-height: 80px;
+  gap: 12px;
+}
+
+.quick-action-card.compact .action-icon {
+  width: 44px;
+  height: 44px;
+  font-size: 1.25rem;
+  border-radius: 10px;
+}
+
+.quick-action-card.compact .action-label {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.quick-action-card.compact .action-description {
+  font-size: 0.8rem;
+}
+
+.quick-action-card.compact .action-arrow {
+  font-size: 1.1rem;
+}
+
+/* Highlight Variant */
+.quick-action-card.highlight {
+  background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+  border: 2px solid #007bff;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+}
+
+.quick-action-card.highlight:hover {
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15);
+}
+
+/* With Badge */
+.quick-action-card.with-badge::after {
+  content: attr(data-badge);
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #dc3545;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Loading State */
+.quick-action-card.loading {
+  pointer-events: none;
+}
+
+.quick-action-card.loading .action-icon {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  color: transparent;
+}
+
+.quick-action-card.loading .action-label {
+  background: #f0f0f0;
+  color: transparent;
+  border-radius: 4px;
+  width: 70%;
+  height: 16px;
+}
+
+.quick-action-card.loading .action-description {
+  background: #f0f0f0;
+  color: transparent;
+  border-radius: 4px;
+  width: 90%;
+  height: 12px;
+  margin-top: 6px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Pulse Animation for Important Actions */
+.quick-action-card.pulse {
+  animation: gentlePulse 2s infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    box-shadow: 0 2px 15px rgba(0, 123, 255, 0.2);
+  }
+}
+
+.quick-action-card.emergency.pulse {
+  animation: emergencyPulse 2s infinite;
+}
+
+@keyframes emergencyPulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.1);
+  }
+  50% {
+    box-shadow: 0 2px 15px rgba(220, 53, 69, 0.3);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .quick-action-card {
+    padding: 16px;
+    gap: 12px;
+    min-height: 90px;
+  }
+
+  .action-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+  }
+
+  .action-label {
+    font-size: 1rem;
+  }
+
+  .action-description {
+    font-size: 0.8rem;
+  }
+
+  .action-arrow {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-action-card {
+    padding: 14px;
+    gap: 10px;
+    min-height: 85px;
+  }
+
+  .action-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+  }
+
+  .action-label {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .action-description {
+    font-size: 0.75rem;
+  }
+
+  .action-arrow {
+    font-size: 1rem;
+  }
+
+  /* Stack layout for very small screens */
+  .quick-action-card.stack-layout {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .quick-action-card.stack-layout .action-content {
+    text-align: center;
+  }
+}
+
+/* Focus States for Accessibility */
+.quick-action-card:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+.quick-action-button:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .quick-action-card {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+
+  .quick-action-card .action-label {
+    color: #f7fafc;
+  }
+
+  .quick-action-card .action-description {
+    color: #a0aec0;
+  }
+
+  .quick-action-card .action-icon {
+    background: #4a5568;
+    color: #e2e8f0;
+  }
+
+  .quick-action-card .action-arrow {
+    color: #718096;
+  }
+
+  .quick-action-card:hover {
+    border-color: #63b3ed;
+  }
+
+  .quick-action-card:hover .action-arrow {
+    color: #63b3ed;
+  }
+
+  .quick-action-card.emergency {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    border-color: #fc8181;
+  }
+
+  .quick-action-card.emergency .action-icon {
+    background: rgba(252, 129, 129, 0.1);
+    color: #fc8181;
+  }
+
+  .quick-action-card.emergency:hover .action-arrow {
+    color: #fc8181;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .quick-action-card {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+
+  .quick-action-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .action-arrow {
+    display: none;
+  }
+}
