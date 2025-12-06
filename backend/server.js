@@ -18,11 +18,11 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 require('dotenv').config();
 
-// Import middleware - WITH src/ prefix
+// Import middleware
 const errorHandler = require('./middleware/errorHandler');
 const logger = require('./middleware/logger');
 
-// Import routes - ALL WITH src/ prefix
+// Import routes
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const ticketRoutes = require('./routes/tickets');
@@ -50,6 +50,7 @@ app.use(helmet({
   },
   crossOriginEmbedderPolicy: false,
 }));
+
 // Rate limiting
 const limiter = rateLimit({
   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
@@ -70,7 +71,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Body parsing middleware
+// Body parsing
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -100,7 +101,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/notifications', notificationRoutes);
 
-// Health check endpoint
+// Health check
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
@@ -112,7 +113,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// API documentation endpoint
+// API docs endpoint
 app.get('/api/docs', (req, res) => {
   res.json({
     message: 'Bugema University IT Support System API',
@@ -160,30 +161,34 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Error handling middleware (must be last)
+// Error handling
 app.use(errorHandler);
 
 // Database connection
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_ATLAS_URI || 'mongodb://127.0.0.1:27017/it-support-system');
+    const conn = await mongoose.connect(
+      process.env.MONGODB_URI || process.env.MONGO_ATLAS_URI
+    );
+
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-    
-    // Log successful connection
+
     if (auditService && auditService.logSystemEvent) {
       auditService.logSystemEvent('DATABASE_CONNECTED', {
         host: conn.connection.host,
         database: conn.connection.name
       });
     }
-    
+
   } catch (error) {
     console.error(`❌ Database connection failed: ${error.message}`);
+    
     if (auditService && auditService.logSystemEvent) {
       auditService.logSystemEvent('DATABASE_CONNECTION_FAILED', {
         error: error.message
       });
     }
+
     process.exit(1);
   }
 };
@@ -193,7 +198,7 @@ const PORT = process.env.PORT || 5000;
 const startServer = async () => {
   try {
     await connectDB();
-    
+
     const server = app.listen(PORT, () => {
       console.log(`
 🚀 Bugema University IT Support System
@@ -202,7 +207,7 @@ const startServer = async () => {
 📚 API Docs: http://localhost:${PORT}/api/docs
 ❤️  Health: http://localhost:${PORT}/api/health
       `);
-      
+
       if (auditService && auditService.logSystemEvent) {
         auditService.logSystemEvent('SERVER_STARTED', {
           port: PORT,
@@ -211,8 +216,7 @@ const startServer = async () => {
         });
       }
     });
-    
-    // Graceful shutdown
+
     process.on('SIGTERM', () => {
       console.log('SIGTERM signal received: closing HTTP server');
       server.close(() => {
@@ -223,21 +227,24 @@ const startServer = async () => {
         });
       });
     });
-    
+
     return server;
+
   } catch (error) {
     console.error('❌ Failed to start server:', error);
+
     if (auditService && auditService.logSystemEvent) {
       auditService.logSystemEvent('SERVER_START_FAILED', {
         error: error.message,
         timestamp: new Date().toISOString()
       });
     }
+
     process.exit(1);
   }
 };
 
-// Only start server if this file is run directly
+// Only start server if run directly
 if (require.main === module) {
   startServer();
 }
