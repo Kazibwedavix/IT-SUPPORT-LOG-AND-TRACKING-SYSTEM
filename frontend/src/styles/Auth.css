@@ -1484,3 +1484,822 @@
     display: none;
   }
 }
+/* Add these styles to your existing Auth.css */
+
+/* Network Status */
+.network-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.network-status.warning {
+  background-color: #fef3c7;
+  border: 1px solid #f59e0b;
+  color: #92400e;
+}
+
+/* Error Boundary */
+.registration-error-boundary {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.registration-error-boundary .error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.registration-error-boundary .error-icon {
+  width: 60px;
+  height: 60px;
+  color: #ef4444;
+}
+
+.registration-error-boundary h3 {
+  font-size: 24px;
+  color: #1f2937;
+  margin: 0;
+}
+
+.registration-error-boundary .error-detail {
+  font-family: monospace;
+  background: #f3f4f6;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.registration-error-boundary .error-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.registration-error-boundary .error-contact {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Confirmation Modal */
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.confirmation-modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.confirmation-modal-icon {
+  width: 40px;
+  height: 40px;
+  color: #3b82f6;
+}
+
+.confirmation-modal h3 {
+  font-size: 22px;
+  color: #1f2937;
+  margin: 0;
+}
+
+.confirmation-modal-body {
+  margin: 25px 0;
+}
+
+.confirmation-details {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.confirmation-detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.confirmation-detail-item:last-child {
+  border-bottom: none;
+}
+
+.confirmation-detail-label {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.confirmation-detail-value {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.confirmation-modal-footer {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.confirmation-modal-footer .auth-btn {
+  flex: 1;
+}
+
+/* Form Section Improvements */
+.form-section {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.form-section:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  color: #1f2937;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+/* Input Group Improvements */
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.input-group:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-group.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.input-icon {
+  padding: 0 12px;
+  color: #9ca3af;
+}
+
+.form-input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  color: #1f2937;
+  outline: none;
+}
+
+.form-input:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Password Strength Meter */
+.password-strength {
+  margin-top: 10px;
+}
+
+.strength-meter {
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.strength-bar {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-bar.weak {
+  background-color: #ef4444;
+}
+
+.strength-bar.fair {
+  background-color: #f59e0b;
+}
+
+.strength-bar.good {
+  background-color: #10b981;
+}
+
+.strength-bar.strong {
+  background-color: #059669;
+}
+
+.strength-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.strength-label {
+  font-weight: 500;
+}
+
+.strength-score {
+  font-weight: 600;
+}
+
+/* Role Selection */
+.role-selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.role-option {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.role-option:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+}
+
+.role-option.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.role-radio {
+  display: none;
+}
+
+.role-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.role-icon {
+  font-size: 24px;
+}
+
+.role-info {
+  flex: 1;
+}
+
+.role-label {
+  display: block;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.role-description {
+  display: block;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.role-notice {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #f59e0b;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-form {
+    padding: 20px;
+  }
+  
+  .form-section {
+    padding: 20px;
+  }
+  
+  .role-selection {
+    grid-template-columns: 1fr;
+  }
+  
+  .confirmation-modal-content {
+    padding: 20px;
+  }
+  
+  .confirmation-modal-footer {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form {
+    padding: 15px;
+  }
+  
+  .form-section {
+    padding: 15px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+  }
+  
+  .form-input {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Network Status */
+.network-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.network-status.warning {
+  background-color: #fef3c7;
+  border: 1px solid #f59e0b;
+  color: #92400e;
+}
+
+/* Confirmation Modal */
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.confirmation-modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.confirmation-modal-icon {
+  width: 40px;
+  height: 40px;
+  color: #3b82f6;
+}
+
+.confirmation-modal h3 {
+  font-size: 22px;
+  color: #1f2937;
+  margin: 0;
+}
+
+.confirmation-modal-body {
+  margin: 25px 0;
+}
+
+.confirmation-details {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.confirmation-detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.confirmation-detail-item:last-child {
+  border-bottom: none;
+}
+
+.confirmation-detail-label {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.confirmation-detail-value {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.confirmation-notice {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 20px;
+}
+
+.confirmation-modal-footer {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.confirmation-modal-footer .auth-btn {
+  flex: 1;
+}
+
+/* Registration Error */
+.registration-error .error-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  text-align: center;
+}
+
+.registration-error .error-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.support-contact {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-text {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+/* Email Verification Styles */
+.verify-email {
+  max-width: 600px;
+}
+
+.verification-status {
+  padding: 30px;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.verifying {
+  color: #666;
+}
+
+.verifying .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #004d40;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+.success {
+  color: #2e7d32;
+}
+
+.success .success-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.success .success-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.error .error-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.error .error-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.verification-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.verification-actions .auth-btn {
+  min-width: 150px;
+}
+
+.verified-email {
+  background: #e8f5e9;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+
+.verification-info {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff3cd;
+  border-radius: 5px;
+  border: 1px solid #ffeaa7;
+}
+
+.verification-info ul {
+  text-align: left;
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.verification-info li {
+  margin: 5px 0;
+}
+
+.support-contact {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Success Message Styles */
+.success-message {
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.success-content {
+  text-align: center;
+}
+
+.success-content h3 {
+  color: #2e7d32;
+  margin: 10px 0;
+}
+
+.instructions {
+  text-align: left;
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+
+.success-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.reset-email {
+  background: #e3f2fd;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+
+.redirect-notice {
+  font-style: italic;
+  color: #666;
+  margin: 15px 0;
+}
+
+/* Password Strength Meter */
+.password-strength {
+  margin: 10px 0;
+}
+
+.strength-meter {
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.strength-bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.strength-bar.weak {
+  background: #ef4444;
+}
+
+.strength-bar.fair {
+  background: #f59e0b;
+}
+
+.strength-bar.good {
+  background: #10b981;
+}
+
+.strength-bar.strong {
+  background: #059669;
+}
+
+.strength-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.strength-label {
+  font-weight: 500;
+}
+
+.strength-score {
+  font-weight: bold;
+}
+
+/* Password Requirements */
+.password-requirements {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.password-requirements ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 10px 0;
+}
+
+.password-requirements li {
+  margin: 5px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.password-requirements li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+}
+
+.password-requirements li.valid {
+  color: #10b981;
+}
+
+.password-requirements li.valid:before {
+  content: '✓';
+  color: #10b981;
+}
+
+.password-requirements li.invalid {
+  color: #9ca3af;
+}
+
+.password-requirements li.invalid:before {
+  content: '✗';
+  color: #9ca3af;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Add these styles to your existing Auth.css file */
+
+.verification-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.resend-verification-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resend-verification-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.verification-help {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}

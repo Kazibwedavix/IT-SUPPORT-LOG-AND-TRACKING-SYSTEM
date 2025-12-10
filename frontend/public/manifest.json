@@ -1,54 +1,19 @@
 {
-  "short_name": "IT Support",
-  "name": "IT Support System",
-  "description": "Enterprise IT support ticketing system",
+  "short_name": "Bugema IT Support",
+  "name": "Bugema University IT Support System",
+  "description": "Enterprise IT Support Management Platform for Bugema University",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#2563eb",
+  "theme_color": "#667eea",
   "background_color": "#ffffff",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "scope": "/",
-  "categories": ["business", "productivity", "utilities"],
-  "screenshots": [
-    {
-      "src": "screenshot1.png",
-      "type": "image/png",
-      "sizes": "1280x720"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "New Ticket",
-      "short_name": "New",
-      "description": "Create a new support ticket",
-      "url": "/tickets/new",
-      "icons": [{ "src": "icons/new-ticket.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "Dashboard",
-      "short_name": "Home",
-      "description": "Go to dashboard",
-      "url": "/dashboard",
-      "icons": [{ "src": "icons/dashboard.png", "sizes": "96x96" }]
-    }
-  ]
+  "lang": "en-US"
 }

@@ -1,35 +1,14 @@
+// frontend/src/pages/Login.js - PRODUCTION READY COMPLETE
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import '../styles/Auth.css';
 
-// Security constants
 const MAX_LOGIN_ATTEMPTS = 5;
-const LOCKOUT_DURATION = 15 * 60 * 1000; // 15 minutes
+const LOCKOUT_DURATION = 15 * 60 * 1000;
 const PASSWORD_MIN_LENGTH = 8;
 
-/**
- * Production-Grade Enterprise Login Component
- * 
- * Features:
- * - Enhanced security with rate limiting
- * - Input validation and sanitization
- * - Password visibility toggle
- * - Remember me functionality
- * - Session management
- * - Security event logging
- * - Error handling with user-friendly messages
- * - Accessibility compliance
- * - Responsive design
- * - Loading states with spinners
- * - Auto-focus management
- * - Form validation feedback
- * - Secure password requirements
- * 
- * @version 2.0.0
- * @author IT Support System
- */
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -43,40 +22,29 @@ const Login = () => {
   const [loginAttempts, setLoginAttempts] = useState(0);
   const [lockoutUntil, setLockoutUntil] = useState(null);
   const [validationErrors, setValidationErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showResendVerification, setShowResendVerification] = useState(false);
+  const [unverifiedEmail, setUnverifiedEmail] = useState('');
 
   const emailRef = useRef(null);
   const { login, logSecurityEvent } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Get redirect path or default to dashboard
   const from = location.state?.from?.pathname || '/dashboard';
 
-  // Auto-focus email field on mount
   useEffect(() => {
-    if (emailRef.current) {
-      emailRef.current.focus();
-    }
+    if (emailRef.current) emailRef.current.focus();
 
-    // Check for locked out state
     const lockoutTime = localStorage.getItem('login_lockout_until');
     if (lockoutTime && Date.now() < parseInt(lockoutTime)) {
       setLockoutUntil(parseInt(lockoutTime));
     }
 
-    // Check for saved email
     const savedEmail = localStorage.getItem('remembered_email');
     if (savedEmail) {
-      setFormData(prev => ({
-        ...prev,
-        email: savedEmail,
-        rememberMe: true
-      }));
+      setFormData(prev => ({ ...prev, email: savedEmail, rememberMe: true }));
     }
   }, []);
 
-  // Countdown for lockout
   useEffect(() => {
     if (!lockoutUntil) return;
 
@@ -92,38 +60,18 @@ const Login = () => {
     return () => clearInterval(interval);
   }, [lockoutUntil]);
 
-  /**
-   * Validates email format
-   */
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email.trim());
   };
 
-  /**
-   * Validates password strength
-   */
   const validatePassword = (password) => {
     if (password.length < PASSWORD_MIN_LENGTH) {
       return `Password must be at least ${PASSWORD_MIN_LENGTH} characters`;
     }
-    
-    // Additional password strength checks (optional)
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumbers = /\d/.test(password);
-    const hasSpecialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
-    
-    if (!hasUpperCase || !hasLowerCase || !hasNumbers || !hasSpecialChar) {
-      return 'Password must include uppercase, lowercase, numbers, and special characters';
-    }
-    
     return null;
   };
 
-  /**
-   * Validates form inputs
-   */
   const validateForm = () => {
     const errors = {};
 
@@ -137,98 +85,77 @@ const Login = () => {
       errors.password = 'Password is required';
     } else {
       const passwordError = validatePassword(formData.password);
-      if (passwordError) {
-        errors.password = passwordError;
-      }
+      if (passwordError) errors.password = passwordError;
     }
 
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
-  /**
-   * Handles input changes with sanitization
-   */
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     
-    // Sanitize input
     let sanitizedValue = value;
-    
-    if (name === 'email') {
-      sanitizedValue = value.trim().toLowerCase();
-    } else if (name === 'password') {
-      sanitizedValue = value;
-      // Clear password error when user starts typing
-      if (validationErrors.password) {
-        setValidationErrors(prev => ({ ...prev, password: '' }));
-      }
-    }
+    if (name === 'email') sanitizedValue = value.trim().toLowerCase();
     
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : sanitizedValue
     }));
 
-    // Clear field-specific error when user starts typing
     if (validationErrors[name]) {
       setValidationErrors(prev => ({ ...prev, [name]: '' }));
     }
+    
+    // Clear verification resend option if email changes
+    if (name === 'email' && showResendVerification) {
+      setShowResendVerification(false);
+      setUnverifiedEmail('');
+    }
   };
 
-  /**
-   * Handles password visibility toggle
-   */
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
+  const handleResendVerification = () => {
+    navigate('/resend-verification', { 
+      state: { email: unverifiedEmail || formData.email } 
+    });
   };
 
-  /**
-   * Handles form submission with enhanced security
-   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setValidationErrors({});
+    setShowResendVerification(false);
+    setUnverifiedEmail('');
 
-    // Check if user is locked out
     if (lockoutUntil) {
       const remainingTime = Math.ceil((lockoutUntil - Date.now()) / 1000 / 60);
       setError(`Account locked. Try again in ${remainingTime} minutes.`);
       return;
     }
 
-    // Validate form
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setLoading(true);
-    setIsSubmitting(true);
 
     try {
-      // Log login attempt
+      // Security logging
       logSecurityEvent('login_attempt', { email: formData.email });
 
-      // Perform login
       const result = await login(formData.email, formData.password, formData.rememberMe);
       
       if (result.success) {
-        // Save email if remember me is checked
         if (formData.rememberMe) {
           localStorage.setItem('remembered_email', formData.email);
         } else {
           localStorage.removeItem('remembered_email');
         }
 
-        // Reset login attempts on successful login
         localStorage.removeItem('login_attempts');
         setLoginAttempts(0);
-
-        // Navigate to intended destination
         navigate(from, { replace: true });
       } else {
-        // Handle failed login
         const attempts = loginAttempts + 1;
         setLoginAttempts(attempts);
         localStorage.setItem('login_attempts', attempts.toString());
@@ -253,10 +180,19 @@ const Login = () => {
     } catch (err) {
       console.error('Login error:', err);
       
-      // Enhanced error handling
       let errorMessage = 'Login failed. Please try again.';
       
-      if (err.response) {
+      // Check if error is due to unverified email
+      if (err.response?.status === 403 && err.response?.data?.requiresVerification) {
+        errorMessage = 'Please verify your email before logging in. Check your email for verification link.';
+        setShowResendVerification(true);
+        setUnverifiedEmail(formData.email);
+        
+        logSecurityEvent('unverified_email_attempt', {
+          email: formData.email,
+          requiresVerification: true
+        });
+      } else if (err.response) {
         const { status, data } = err.response;
         
         switch (status) {
@@ -283,21 +219,17 @@ const Login = () => {
       
       setError(errorMessage);
       
-      // Log the error
       logSecurityEvent('login_error', {
         email: formData.email,
         error: err.message,
-        status: err.response?.status
+        status: err.response?.status,
+        requiresVerification: err.response?.data?.requiresVerification || false
       });
     } finally {
       setLoading(false);
-      setIsSubmitting(false);
     }
   };
 
-  /**
-   * Handles forgot password
-   */
   const handleForgotPassword = () => {
     if (!formData.email || !validateEmail(formData.email)) {
       setError('Please enter a valid email address to reset password');
@@ -307,30 +239,24 @@ const Login = () => {
     navigate('/forgot-password', { state: { email: formData.email } });
   };
 
-  /**
-   * Calculates remaining lockout time
-   */
   const getRemainingLockoutTime = () => {
     if (!lockoutUntil) return 0;
     return Math.ceil((lockoutUntil - Date.now()) / 1000);
   };
 
-  // Format time for display
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
-  // Check if form is disabled
-  const isFormDisabled = loading || lockoutUntil || isSubmitting;
+  const isFormDisabled = loading || lockoutUntil;
 
   return (
     <>
       <Navbar />
       <div className="auth-container">
         <div className="auth-form">
-          {/* Header */}
           <div className="auth-header">
             <div className="auth-logo">
               <svg className="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -343,7 +269,6 @@ const Login = () => {
             <p className="auth-subtitle">Enterprise IT Support Management Platform</p>
           </div>
 
-          {/* Lockout Warning */}
           {lockoutUntil && (
             <div className="lockout-warning">
               <div className="lockout-icon">
@@ -364,7 +289,6 @@ const Login = () => {
             </div>
           )}
 
-          {/* Error Message */}
           {error && !lockoutUntil && (
             <div className="error-message" role="alert">
               <div className="error-icon">
@@ -374,32 +298,29 @@ const Login = () => {
               </div>
               <div className="error-content">
                 <p>{error}</p>
+                {showResendVerification && (
+                  <div className="verification-actions">
+                    <button
+                      type="button"
+                      onClick={handleResendVerification}
+                      className="resend-verification-btn"
+                    >
+                      Resend Verification Email
+                    </button>
+                    <p className="verification-help">
+                      Didn't receive the email? Check your spam folder or request a new verification link.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           )}
 
-          {/* Success Message (if coming from registration) */}
-          {location.state?.registrationSuccess && (
-            <div className="success-message" role="alert">
-              <div className="success-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <div className="success-content">
-                <p>Registration successful! Please login with your credentials.</p>
-              </div>
-            </div>
-          )}
-
-          {/* Login Form */}
           {!lockoutUntil && (
             <form onSubmit={handleSubmit} className="login-form" noValidate>
-              {/* Email Field */}
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
-                  Email Address
-                  <span className="required">*</span>
+                  Email Address <span className="required">*</span>
                 </label>
                 <div className={`input-group ${validationErrors.email ? 'error' : ''}`}>
                   <div className="input-icon">
@@ -418,12 +339,10 @@ const Login = () => {
                     disabled={isFormDisabled}
                     placeholder="Enter your email address"
                     className="form-input"
-                    aria-describedby={validationErrors.email ? "email-error" : undefined}
-                    aria-required="true"
                   />
                 </div>
                 {validationErrors.email && (
-                  <div id="email-error" className="error-text" role="alert">
+                  <div className="error-text" role="alert">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
                     </svg>
@@ -432,12 +351,10 @@ const Login = () => {
                 )}
               </div>
 
-              {/* Password Field */}
               <div className="form-group">
                 <div className="form-label-row">
                   <label htmlFor="password" className="form-label">
-                    Password
-                    <span className="required">*</span>
+                    Password <span className="required">*</span>
                   </label>
                   <button
                     type="button"
@@ -464,8 +381,6 @@ const Login = () => {
                     disabled={isFormDisabled}
                     placeholder="Enter your password"
                     className="form-input"
-                    aria-describedby={validationErrors.password ? "password-error" : undefined}
-                    aria-required="true"
                   />
                   <button
                     type="button"
@@ -486,7 +401,7 @@ const Login = () => {
                   </button>
                 </div>
                 {validationErrors.password && (
-                  <div id="password-error" className="error-text" role="alert">
+                  <div className="error-text" role="alert">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
                     </svg>
@@ -495,7 +410,6 @@ const Login = () => {
                 )}
               </div>
 
-              {/* Remember Me */}
               <div className="form-group checkbox-group">
                 <label className="checkbox-label">
                   <input
@@ -511,13 +425,11 @@ const Login = () => {
                 </label>
               </div>
 
-              {/* Submit Button */}
               <div className="form-group">
                 <button
                   type="submit"
                   disabled={isFormDisabled}
                   className={`auth-btn ${loading ? 'loading' : ''}`}
-                  aria-busy={loading}
                 >
                   {loading ? (
                     <>
@@ -530,7 +442,6 @@ const Login = () => {
                 </button>
               </div>
 
-              {/* Security Info */}
               <div className="security-info">
                 <p className="security-text">
                   <svg viewBox="0 0 24 24" fill="currentColor">
@@ -542,32 +453,22 @@ const Login = () => {
             </form>
           )}
 
-          {/* Registration Link */}
           <div className="auth-footer">
             <p className="auth-link">
               Don't have an account?{' '}
-              <Link 
-                to="/register" 
-                className="link"
-                aria-disabled={isFormDisabled}
-              >
-                Request access
-              </Link>
+              <Link to="/register" className="link">Request access</Link>
             </p>
             <p className="auth-version">
               IT Support System v{process.env.REACT_APP_VERSION || '1.0.0'}
             </p>
           </div>
 
-          {/* Additional Security Info (only shown in production) */}
           {process.env.NODE_ENV === 'production' && (
             <div className="security-footer">
-              <p className="security-notice">
-                For security assistance, contact your IT administrator.
-              </p>
+              <p className="security-notice">For security assistance, contact your IT administrator.</p>
               <p className="security-contact">
-                Email: <a href="mailto:it-support@yourcompany.com">support@bugemauniv.ac.ug</a> | 
-                Phone: <a href="tel:+1234567890">+256 784-845-785</a>
+                Email: <a href="mailto:support@bugemauniv.ac.ug">support@bugemauniv.ac.ug</a> | 
+                Phone: <a href="tel:+256784845785">+256 784-845-785</a>
               </p>
             </div>
           )}

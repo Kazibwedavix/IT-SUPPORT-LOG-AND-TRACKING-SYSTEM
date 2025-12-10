@@ -1,0 +1,390 @@
+/* src/styles/Settings.css */
+.settings-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.settings-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.settings-header h1 {
+  font-size: 2.5rem;
+  color: #2d3748;
+  margin-bottom: 10px;
+}
+
+.settings-header p {
+  color: #718096;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.settings-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.settings-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.settings-card-header {
+  padding: 24px;
+  border-bottom: 2px solid #e2e8f0;
+  background: #f7fafc;
+}
+
+.settings-card-header h3 {
+  font-size: 1.3rem;
+  color: #2d3748;
+  margin-bottom: 6px;
+}
+
+.settings-card-header p {
+  color: #718096;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.settings-card-body {
+  padding: 24px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.setting-info h4 {
+  font-size: 1.1rem;
+  color: #2d3748;
+  margin-bottom: 6px;
+}
+
+.setting-info p {
+  color: #718096;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.setting-control {
+  min-width: 120px;
+}
+
+.theme-toggle {
+  display: flex;
+  background: #edf2f7;
+  border-radius: 9999px;
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-option {
+  padding: 8px 20px;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #718096;
+  transition: all 0.3s;
+}
+
+.toggle-option.active {
+  background: white;
+  color: #2d3748;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.font-size-select,
+.privacy-select {
+  width: 100%;
+  padding: 10px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  font-size: 0.95rem;
+  color: #2d3748;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.font-size-select:focus,
+.privacy-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Switch toggle */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #667eea;
+}
+
+input:checked + .slider:before {
+  transform: translateX(30px);
+}
+
+.settings-actions {
+  background: #f7fafc;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  border: 2px solid #e2e8f0;
+}
+
+.save-success {
+  background: #c6f6d5;
+  color: #276749;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid #9ae6b4;
+  animation: slideIn 0.3s ease-out;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.settings-footer {
+  background: #f7fafc;
+  padding: 30px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+}
+
+.system-info {
+  margin-bottom: 30px;
+}
+
+.system-info p {
+  color: #4a5568;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.system-info p strong {
+  color: #2d3748;
+}
+
+.danger-zone {
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #fc8181;
+}
+
+.danger-zone h4 {
+  color: #9b2c2c;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.danger-zone p {
+  color: #c53030;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.danger-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-danger {
+  background: #fc8181;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+  background: #f56565;
+}
+
+/* Dark theme support */
+.dark-theme .settings-header h1 {
+  color: #e2e8f0;
+}
+
+.dark-theme .settings-header p {
+  color: #a0aec0;
+}
+
+.dark-theme .settings-card {
+  background: #2d3748;
+}
+
+.dark-theme .settings-card-header {
+  background: #1a202c;
+  border-bottom-color: #4a5568;
+}
+
+.dark-theme .settings-card-header h3 {
+  color: #e2e8f0;
+}
+
+.dark-theme .settings-card-header p {
+  color: #a0aec0;
+}
+
+.dark-theme .setting-info h4 {
+  color: #e2e8f0;
+}
+
+.dark-theme .setting-info p {
+  color: #a0aec0;
+}
+
+.dark-theme .setting-item {
+  border-bottom-color: #4a5568;
+}
+
+.dark-theme .theme-toggle {
+  background: #1a202c;
+}
+
+.dark-theme .toggle-option.active {
+  background: #4a5568;
+  color: #e2e8f0;
+}
+
+.dark-theme .font-size-select,
+.dark-theme .privacy-select {
+  background: #1a202c;
+  border-color: #4a5568;
+  color: #e2e8f0;
+}
+
+.dark-theme .settings-actions {
+  background: #1a202c;
+  border-color: #4a5568;
+}
+
+.dark-theme .settings-footer {
+  background: #1a202c;
+  border-color: #4a5568;
+}
+
+.dark-theme .system-info p {
+  color: #a0aec0;
+}
+
+.dark-theme .system-info p strong {
+  color: #e2e8f0;
+}
+
+.dark-theme .danger-zone {
+  background: #2d3748;
+  border-color: #fc8181;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .setting-control {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .danger-actions {
+    flex-direction: column;
+  }
+}

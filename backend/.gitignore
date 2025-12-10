@@ -1,24 +1,250 @@
+# ============================================================================
+# NODE.JS / NPM
+# ============================================================================
 # Dependencies
 node_modules/
-package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json  # Keep if you want, but many teams don't commit it
 
-# Environment variables
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# ============================================================================
+# ENVIRONMENT FILES (CRITICAL - NEVER COMMIT THESE!)
+# ============================================================================
 .env
 .env.local
-.env.production
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging.local
+.env.*.local
+.env.backup
+.env.example.local
 
-# Logs
-logs
+# Sensitive configuration files
+config/secrets/
+config/credentials/
+config/private/
+config/*.json
+config/*.yaml
+config/*.yml
+
+# ============================================================================
+# DATABASE & DATA FILES
+# ============================================================================
+# MongoDB
+*.mongod
+data/
+dump/
+mongod.log
+mongodb/
+mongo/
+
+# Database dumps
+*.dump
+*.backup
+*.sql
+*.bak
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================================================
+# LOGS & TEMPORARY FILES
+# ============================================================================
+logs/
 *.log
-npm-debug.log*
+log/
+debug.log
+error.log
+combined.log
+access.log
 
-# OS files
+# Temporary files
+*.tmp
+*.temp
+*.bk
+*.backup
+temp/
+tmp/
+.tmp/
+.temp/
+
+# ============================================================================
+# UPLOADS & USER GENERATED CONTENT
+# ============================================================================
+uploads/
+public/uploads/
+media/
+assets/uploads/
+user-uploads/
+attachments/
+files/
+images/
+videos/
+documents/
+
+# ============================================================================
+# BUILD/COMPILED FILES
+# ============================================================================
+# Build directories
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+
+# Compiled binary addons
+build/Release/
+
+# ============================================================================
+# OPERATING SYSTEM FILES
+# ============================================================================
+# macOS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# IDE
-.vscode/
-.idea/
+# Windows
+desktop.ini
+*.lnk
+$RECYCLE.BIN/
 
-# Uploads (we'll create this later)
-uploads/
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================================================================
+# EDITOR/IDE FILES
+# ============================================================================
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Vim
+*.swp
+*.swo
+*~
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# ============================================================================
+# TESTING
+# ============================================================================
+# Test coverage
+coverage/
+.nyc_output
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+
+# Jest
+jest-cache/
+
+# ============================================================================
+# SSL/TLS CERTIFICATES (NEVER COMMIT!)
+# ============================================================================
+*.pem
+*.key
+*.crt
+*.csr
+*.pfx
+*.p12
+*.der
+certificates/
+ssl/
+certs/
+
+# ============================================================================
+# SESSION & CACHE
+# ============================================================================
+# Session files
+sessions/
+*.session
+
+# Cache
+.cache/
+.cache-loader/
+
+# ============================================================================
+# SPECIFIC TO YOUR PROJECT
+# ============================================================================
+# MongoDB data directory (if using local MongoDB)
+data/db/
+
+# Email service logs (if using local email testing)
+email-logs/
+
+# Backup files
+backup/
+*.backup
+
+# ============================================================================
+# MISC
+# ============================================================================
+# Package lock files (uncomment if you don't want to commit them)
+# package-lock.json
+# yarn.lock
+
+# Bundle analyzer reports
+report.html
+
+# dotenv
+.env.development
+.env.production
+.env.test
+
+# misc
+.sass-cache
+connect.lock
+libpeerconnection.log
+test-error.log
+test-output.log
+typings/
+
+# System Files
+*.sys
+*.dmp

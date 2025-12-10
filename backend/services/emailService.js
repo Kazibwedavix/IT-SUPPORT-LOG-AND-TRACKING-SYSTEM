@@ -49,43 +49,46 @@ class EmailService {
   /**
    * Initialize email service with Gmail SMTP
    */
-  init() {
-    try {
-      const emailConfig = this.getEmailConfig();
-      
-      // Check if email is properly configured
-      if (!emailConfig.valid) {
-        console.warn('⚠️  Email configuration incomplete:', emailConfig.missing);
-        this.setupFallbackLogging();
-        return;
-      }
-
-      // Create SMTP transporter
-      this.transporter = nodemailer.createTransport({
-        host: emailConfig.host,
-        port: emailConfig.port,
-        secure: emailConfig.secure, // true for 465, false for 587
-        auth: {
-          user: emailConfig.username,
-          pass: emailConfig.password
-        },
-        tls: {
-          rejectUnauthorized: false // Allow self-signed certificates in dev
-        },
-        pool: true, // Use connection pooling for better performance
-        maxConnections: 5, // Maximum concurrent connections
-        maxMessages: 100 // Maximum messages per connection
-      });
-
-      // Verify connection
-      this.verifyConnection();
-      this.isConfigured = true;
-      
-    } catch (error) {
-      console.error('❌ Email service initialization failed:', error.message);
+ init() {
+  try {
+    const emailConfig = this.getEmailConfig();
+    
+    // Check if email is properly configured
+    if (!emailConfig.valid) {
+      console.warn('⚠️  Email configuration incomplete:', emailConfig.missing);
       this.setupFallbackLogging();
+      return;
     }
+
+    // Create SMTP transporter
+    this.transporter = nodemailer.createTransport({
+      host: emailConfig.host,
+      port: emailConfig.port,
+      secure: emailConfig.secure,
+      auth: {
+        user: emailConfig.username,
+        pass: emailConfig.password
+      },
+      tls: {
+        rejectUnauthorized: false
+      },
+      pool: true,
+      maxConnections: 5,
+      maxMessages: 100
+    });
+
+    // Set as configured immediately since transporter is created
+    this.isConfigured = true;
+    console.log('✅ Email transporter created successfully');
+    
+    // Verify connection asynchronously (don't block initialization)
+    this.verifyConnection();
+    
+  } catch (error) {
+    console.error('❌ Email service initialization failed:', error.message);
+    this.setupFallbackLogging();
   }
+}
 
   /**
    * Get and validate email configuration from environment variables
@@ -217,12 +220,13 @@ class EmailService {
    * @returns {Promise<Object>} Send result
    */
   async sendEmailDirect(options) {
-    const emailConfig = this.getEmailConfig();
-    
-    // If not configured or in development, log to file
-    if (!this.isConfigured || process.env.NODE_ENV !== 'production') {
-      return this.logEmailToFile(options);
-    }
+  const emailConfig = this.getEmailConfig();
+  
+  // If not configured, log to file
+  if (!this.isConfigured || !this.transporter) {
+    console.log('📧 Email not sent - transporter not configured');
+    return this.logEmailToFile(options);
+  }
 
     // Production sending with retry logic (3 attempts)
     for (let attempt = 1; attempt <= 3; attempt++) {
@@ -592,7 +596,600 @@ class EmailService {
           </div>
         </body>
         </html>
-      `
+      `,
+      // ========================================================================
+// TICKET SYSTEM EMAIL TEMPLATES - Add these to your templates object
+// ========================================================================
+
+/**
+ * Ticket Created Confirmation
+ */
+ticketCreated: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Created - Bugema University IT Support</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    .header { background: linear-gradient(135deg, #1a56db 0%, #1e40af 100%); color: white; padding: 30px 20px; text-align: center; }
+    .content { padding: 30px; }
+    .ticket-info { background: #f8f9fa; border-radius: 5px; padding: 20px; margin: 20px 0; }
+    .ticket-detail { margin: 10px 0; display: flex; justify-content: space-between; border-bottom: 1px solid #e9ecef; padding: 5px 0; }
+    .ticket-detail:last-child { border-bottom: none; }
+    .status-badge { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+    .status-open { background: #10b981; color: white; }
+    .status-critical { background: #dc2626; color: white; }
+    .button { display: inline-block; padding: 12px 24px; background: #1a56db; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 15px 0; }
+    .footer { background: #f8f9fa; padding: 20px; text-align: center; color: #6c757d; font-size: 12px; border-top: 1px solid #e9ecef; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0; font-weight: 300;">🎫 Ticket Created Successfully</h1>
+      <p style="margin: 10px 0 0; opacity: 0.9;">Bugema University IT Support System</p>
+    </div>
+    
+    <div class="content">
+      <h2 style="color: #1a56db; margin-top: 0;">Hello ${context.name || 'Valued User'}!</h2>
+      
+      <p>Your support ticket has been created successfully. Here are the details:</p>
+      
+      <div class="ticket-info">
+        <div class="ticket-detail">
+          <strong>Ticket Number:</strong>
+          <span style="font-weight: bold; color: #1a56db;">${context.ticketNumber}</span>
+        </div>
+        <div class="ticket-detail">
+          <strong>Title:</strong>
+          <span>${context.title}</span>
+        </div>
+        <div class="ticket-detail">
+          <strong>Category:</strong>
+          <span>${context.category}</span>
+        </div>
+        <div class="ticket-detail">
+          <strong>Priority:</strong>
+          <span class="status-badge ${context.priority === 'Critical' ? 'status-critical' : 'status-open'}">
+            ${context.priority}
+          </span>
+        </div>
+        <div class="ticket-detail">
+          <strong>Status:</strong>
+          <span class="status-badge status-open">${context.status || 'Open'}</span>
+        </div>
+        <div class="ticket-detail">
+          <strong>Created:</strong>
+          <span>${new Date(context.createdAt).toLocaleString()}</span>
+        </div>
+      </div>
+      
+      <p>You can track your ticket status using this link:</p>
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="${context.ticketUrl}" class="button" style="color: white; text-decoration: none;">
+          View Ticket Status
+        </a>
+      </div>
+      
+      <p><strong>📞 Need immediate help?</strong><br>
+      Contact our support team:<br>
+      Email: <a href="mailto:itsupport@bugemauniv.ac.ug">itsupport@bugemauniv.ac.ug</a><br>
+      Phone: <a href="tel:0784845785">0784845785</a></p>
+      
+      <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>Bugema University IT Support Team</strong>
+      </p>
+    </div>
+    
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} Bugema University IT Support</p>
+      <p>This is an automated notification. Please do not reply.</p>
+      <p>For assistance: <a href="mailto:itsupport@bugemauniv.ac.ug">itsupport@bugemauniv.ac.ug</a></p>
+    </div>
+  </div>
+</body>
+</html>
+`,
+
+/**
+ * Ticket Assigned to Technician
+ */
+ticketAssigned: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Ticket Assigned - Bugema University IT Support</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    .header { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; padding: 30px 20px; text-align: center; }
+    .content { padding: 30px; }
+    .ticket-info { background: #f8f9fa; border-radius: 5px; padding: 20px; margin: 20px 0; }
+    .ticket-detail { margin: 10px 0; }
+    .priority-high { color: #dc2626; font-weight: bold; }
+    .deadline { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 5px; padding: 15px; margin: 15px 0; }
+    .button { display: inline-block; padding: 12px 24px; background: #8b5cf6; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 15px 0; }
+    .footer { background: #f8f9fa; padding: 20px; text-align: center; color: #6c757d; font-size: 12px; border-top: 1px solid #e9ecef; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0; font-weight: 300;">🎯 New Ticket Assigned</h1>
+      <p style="margin: 10px 0 0; opacity: 0.9;">Bugema University IT Support System</p>
+    </div>
+    
+    <div class="content">
+      <h2 style="color: #8b5cf6; margin-top: 0;">Hello ${context.technicianName || 'Technician'}!</h2>
+      
+      <p>A new ticket has been assigned to you. Please review and take action:</p>
+      
+      <div class="ticket-info">
+        <div class="ticket-detail">
+          <strong>Ticket Number:</strong> ${context.ticketNumber}
+        </div>
+        <div class="ticket-detail">
+          <strong>Title:</strong> ${context.title}
+        </div>
+        <div class="ticket-detail">
+          <strong>Category:</strong> ${context.category}
+        </div>
+        <div class="ticket-detail">
+          <strong>Priority:</strong> 
+          <span class="${context.priority === 'High' || context.priority === 'Critical' ? 'priority-high' : ''}">
+            ${context.priority}
+          </span>
+        </div>
+        <div class="ticket-detail">
+          <strong>Submitted By:</strong> ${context.submittedBy}
+        </div>
+        <div class="ticket-detail">
+          <strong>Department:</strong> ${context.department || 'Not specified'}
+        </div>
+        <div class="ticket-detail">
+          <strong>Description:</strong><br>
+          <p style="background: #f1f5f9; padding: 10px; border-radius: 5px; margin: 5px 0;">
+            ${context.description}
+          </p>
+        </div>
+      </div>
+      
+      ${context.dueDate ? `
+      <div class="deadline">
+        <strong>⚠️ Response Deadline:</strong><br>
+        ${new Date(context.dueDate).toLocaleString()}<br>
+        <small>Please respond before this deadline to meet SLA requirements</small>
+      </div>
+      ` : ''}
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="${context.ticketUrl}" class="button" style="color: white; text-decoration: none;">
+          View Ticket Details
+        </a>
+      </div>
+      
+      <p><strong>📋 Required Actions:</strong></p>
+      <ol>
+        <li>Review ticket details</li>
+        <li>Acknowledge assignment</li>
+        <li>Contact user if needed</li>
+        <li>Begin investigation</li>
+        <li>Update ticket status</li>
+      </ol>
+      
+      <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>Bugema University IT Support Management</strong>
+      </p>
+    </div>
+    
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} Bugema University IT Support</p>
+      <p>This is an automated assignment notification.</p>
+    </div>
+  </div>
+</body>
+</html>
+`,
+
+/**
+ * Ticket Status Updated
+ */
+ticketStatusUpdate: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Status Update - Bugema University IT Support</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    .header { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color: white; padding: 30px 20px; text-align: center; }
+    .content { padding: 30px; }
+    .update-info { background: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 15px; margin: 20px 0; }
+    .status-change { background: #e0f2fe; border-radius: 5px; padding: 15px; margin: 15px 0; display: flex; align-items: center; }
+    .status-icon { font-size: 24px; margin-right: 15px; }
+    .button { display: inline-block; padding: 12px 24px; background: #0ea5e9; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 15px 0; }
+    .footer { background: #f8f9fa; padding: 20px; text-align: center; color: #6c757d; font-size: 12px; border-top: 1px solid #e9ecef; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0; font-weight: 300;">📊 Ticket Status Update</h1>
+      <p style="margin: 10px 0 0; opacity: 0.9;">Bugema University IT Support System</p>
+    </div>
+    
+    <div class="content">
+      <h2 style="color: #0ea5e9; margin-top: 0;">Hello ${context.userName}!</h2>
+      
+      <p>The status of your ticket has been updated:</p>
+      
+      <div class="status-change">
+        <div class="status-icon">
+          ${context.newStatus === 'Resolved' ? '✅' : 
+            context.newStatus === 'In Progress' ? '🔄' : 
+            context.newStatus === 'Closed' ? '🔒' : '📝'}
+        </div>
+        <div>
+          <strong>${context.ticketNumber} - ${context.title}</strong><br>
+          Status changed from <strong>${context.oldStatus}</strong> to <strong>${context.newStatus}</strong>
+        </div>
+      </div>
+      
+      ${context.updateNotes ? `
+      <div class="update-info">
+        <strong>Update Notes:</strong><br>
+        ${context.updateNotes}
+      </div>
+      ` : ''}
+      
+      ${context.updatedBy ? `
+      <p><strong>Updated by:</strong> ${context.updatedBy}</p>
+      ` : ''}
+      
+      <p><strong>Next Steps:</strong><br>
+      ${context.nextSteps || 'Please check the ticket for more details and updates.'}</p>
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="${context.ticketUrl}" class="button" style="color: white; text-decoration: none;">
+          View Updated Ticket
+        </a>
+      </div>
+      
+      ${context.contactInfo ? `
+      <p><strong>📞 Need to discuss this update?</strong><br>
+      Contact the assigned technician:<br>
+      ${context.contactInfo}</p>
+      ` : ''}
+      
+      <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>Bugema University IT Support Team</strong>
+      </p>
+    </div>
+    
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} Bugema University IT Support</p>
+      <p>This is an automated status update notification.</p>
+      <p>For questions: <a href="mailto:itsupport@bugemauniv.ac.ug">itsupport@bugemauniv.ac.ug</a></p>
+    </div>
+  </div>
+</body>
+</html>
+`,
+
+/**
+ * Ticket Resolution Notification
+ */
+ticketResolved: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Resolved - Bugema University IT Support</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px 20px; text-align: center; }
+    .content { padding: 30px; }
+    .resolution-box { background: #f0fdf4; border: 1px solid #86efac; border-radius: 5px; padding: 20px; margin: 20px 0; }
+    .success-icon { font-size: 48px; text-align: center; margin: 20px 0; }
+    .stats { background: #f8f9fa; border-radius: 5px; padding: 15px; margin: 20px 0; }
+    .stat-item { display: flex; justify-content: space-between; margin: 10px 0; }
+    .feedback { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 5px; padding: 20px; margin: 20px 0; }
+    .button { display: inline-block; padding: 12px 24px; background: #10b981; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 15px 0; }
+    .footer { background: #f8f9fa; padding: 20px; text-align: center; color: #6c757d; font-size: 12px; border-top: 1px solid #e9ecef; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="success-icon">✅</div>
+      <h1 style="margin: 0; font-weight: 300;">Issue Resolved!</h1>
+      <p style="margin: 10px 0 0; opacity: 0.9;">Bugema University IT Support System</p>
+    </div>
+    
+    <div class="content">
+      <h2 style="color: #10b981; margin-top: 0;">Great news, ${context.userName}!</h2>
+      
+      <p>Your support ticket has been resolved. Here are the details:</p>
+      
+      <div class="resolution-box">
+        <h3 style="margin-top: 0; color: #059669;">Resolution Summary</h3>
+        <p><strong>Ticket:</strong> ${context.ticketNumber} - ${context.title}</p>
+        <p><strong>Resolved by:</strong> ${context.resolvedBy}</p>
+        <p><strong>Resolution Time:</strong> ${context.resolutionTime}</p>
+        
+        <p><strong>Resolution Details:</strong></p>
+        <div style="background: white; padding: 15px; border-radius: 5px; margin: 10px 0;">
+          ${context.resolutionDetails}
+        </div>
+      </div>
+      
+      <div class="stats">
+        <h4 style="margin-top: 0; color: #6b7280;">Ticket Statistics</h4>
+        <div class="stat-item">
+          <span>Time to Resolution:</span>
+          <span><strong>${context.resolutionTime}</strong></span>
+        </div>
+        <div class="stat-item">
+          <span>Status:</span>
+          <span style="color: #10b981; font-weight: bold;">✅ Resolved</span>
+        </div>
+        ${context.slaMet !== undefined ? `
+        <div class="stat-item">
+          <span>SLA Compliance:</span>
+          <span style="${context.slaMet ? 'color: #10b981' : 'color: #dc2626'}; font-weight: bold;">
+            ${context.slaMet ? '✅ Met' : '⚠️ Breached'}
+          </span>
+        </div>
+        ` : ''}
+      </div>
+      
+      <div class="feedback">
+        <h4 style="margin-top: 0; color: #d97706;">📝 How was your experience?</h4>
+        <p>Your feedback helps us improve our service. Please take a moment to rate your experience:</p>
+        
+        <div style="text-align: center; margin: 20px 0;">
+          <a href="${context.feedbackUrl}" class="button" style="background: #f59e0b; color: white; text-decoration: none;">
+            Provide Feedback
+          </a>
+        </div>
+        
+        <p style="font-size: 12px; color: #92400e;">
+          <strong>Note:</strong> This ticket will be automatically closed in 7 days unless reopened.
+        </p>
+      </div>
+      
+      <p><strong>🔧 Need further assistance?</strong><br>
+      If your issue is not fully resolved, you can:<br>
+      1. Add a comment to the ticket<br>
+      2. Contact the technician directly<br>
+      3. Reopen the ticket if needed</p>
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="${context.ticketUrl}" class="button" style="color: white; text-decoration: none;">
+          View Complete Resolution
+        </a>
+      </div>
+      
+      <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>Bugema University IT Support Team</strong><br>
+        <small style="color: #6c757d;">Thank you for choosing Bugema University IT Support</small>
+      </p>
+    </div>
+    
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} Bugema University IT Support</p>
+      <p>This is an automated resolution notification.</p>
+      <p>For assistance: <a href="mailto:itsupport@bugemauniv.ac.ug">itsupport@bugemauniv.ac.ug</a> | <a href="tel:0784845785">0784845785</a></p>
+    </div>
+  </div>
+</body>
+</html>
+`,
+
+/**
+ * New Comment Added Notification
+ */
+newComment: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Comment on Ticket - Bugema University IT Support</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    .header { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 30px 20px; text-align: center; }
+    .content { padding: 30px; }
+    .comment-box { background: #fef3c7; border-radius: 5px; padding: 20px; margin: 20px 0; position: relative; }
+    .comment-box:before { content: '💬'; position: absolute; left: -10px; top: 20px; font-size: 24px; }
+    .comment-author { font-weight: bold; color: #d97706; margin-bottom: 5px; }
+    .comment-time { font-size: 12px; color: #92400e; }
+    .comment-text { margin: 10px 0; }
+    .button { display: inline-block; padding: 12px 24px; background: #f59e0b; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 15px 0; }
+    .footer { background: #f8f9fa; padding: 20px; text-align: center; color: #6c757d; font-size: 12px; border-top: 1px solid #e9ecef; }
+    .internal-note { border-left: 4px solid #dc2626; background: #fef2f2; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0; font-weight: 300;">💬 New Comment Added</h1>
+      <p style="margin: 10px 0 0; opacity: 0.9;">Bugema University IT Support System</p>
+    </div>
+    
+    <div class="content">
+      <h2 style="color: #f59e0b; margin-top: 0;">Hello ${context.recipientName}!</h2>
+      
+      <p>A new comment has been added to your ticket:</p>
+      
+      <div class="comment-box ${context.isInternal ? 'internal-note' : ''}">
+        <div class="comment-author">
+          ${context.commenterName} ${context.isInternal ? '(Internal Note)' : ''}
+        </div>
+        <div class="comment-time">
+          ${new Date(context.commentTime).toLocaleString()}
+        </div>
+        <div class="comment-text">
+          ${context.commentText}
+        </div>
+      </div>
+      
+      ${context.isInternal ? `
+      <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 5px; padding: 10px; margin: 15px 0;">
+        <strong>⚠️ Internal Note:</strong> This comment is visible only to IT staff.
+      </div>
+      ` : ''}
+      
+      <p><strong>Ticket Details:</strong></p>
+      <ul>
+        <li><strong>Ticket:</strong> ${context.ticketNumber}</li>
+        <li><strong>Title:</strong> ${context.ticketTitle}</li>
+        <li><strong>Status:</strong> ${context.ticketStatus}</li>
+      </ul>
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="${context.ticketUrl}" class="button" style="color: white; text-decoration: none;">
+          View Ticket & Reply
+        </a>
+      </div>
+      
+      ${context.canReply ? `
+      <p><strong>💡 Need to respond?</strong><br>
+      You can reply directly in the ticket or contact the commenter:</p>
+      
+      <div style="background: #f1f5f9; padding: 15px; border-radius: 5px; margin: 15px 0;">
+        <strong>Contact Information:</strong><br>
+        Commenter: ${context.commenterName}<br>
+        ${context.commenterEmail ? `Email: ${context.commenterEmail}<br>` : ''}
+        ${context.commenterPhone ? `Phone: ${context.commenterPhone}` : ''}
+      </div>
+      ` : ''}
+      
+      <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>Bugema University IT Support Team</strong>
+      </p>
+    </div>
+    
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} Bugema University IT Support</p>
+      <p>This is an automated comment notification.</p>
+      <p>For assistance: <a href="mailto:itsupport@bugemauniv.ac.ug">itsupport@bugemauniv.ac.ug</a></p>
+    </div>
+  </div>
+</body>
+</html>
+`,
+
+/**
+ * SLA Breach Alert
+ */
+slaBreachAlert: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚠️ SLA Breach Alert - Bugema University IT Support</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    .header { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: white; padding: 30px 20px; text-align: center; }
+    .content { padding: 30px; }
+    .alert-box { background: #fef2f2; border: 2px solid #dc2626; border-radius: 5px; padding: 20px; margin: 20px 0; }
+    .breach-type { display: inline-block; padding: 5px 15px; background: #dc2626; color: white; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 10px; }
+    .deadline-info { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 5px; padding: 15px; margin: 15px 0; }
+    .button { display: inline-block; padding: 12px 24px; background: #dc2626; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 15px 0; }
+    .footer { background: #f8f9fa; padding: 20px; text-align: center; color: #6c757d; font-size: 12px; border-top: 1px solid #e9ecef; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0; font-weight: 300;">⚠️ SLA Breach Alert</h1>
+      <p style="margin: 10px 0 0; opacity: 0.9;">Bugema University IT Support System</p>
+    </div>
+    
+    <div class="content">
+      <h2 style="color: #dc2626; margin-top: 0;">URGENT: Service Level Agreement Breach</h2>
+      
+      <div class="alert-box">
+        <div class="breach-type">${context.breachType.toUpperCase()} BREACH</div>
+        <h3 style="margin: 10px 0; color: #dc2626;">${context.ticketNumber} - ${context.title}</h3>
+        
+        <p><strong>Breach Details:</strong></p>
+        <ul>
+          <li><strong>Breach Type:</strong> ${context.breachType}</li>
+          <li><strong>Breached At:</strong> ${new Date(context.breachTime).toLocaleString()}</li>
+          <li><strong>Target Time:</strong> ${context.targetTime}</li>
+          <li><strong>Actual Time:</strong> ${context.actualTime}</li>
+          <li><strong>Delay:</strong> ${context.delayAmount}</li>
+        </ul>
+        
+        <p><strong>Assigned Technician:</strong> ${context.assignedTo || 'Unassigned'}</p>
+        <p><strong>Ticket Priority:</strong> ${context.priority}</p>
+      </div>
+      
+      <div class="deadline-info">
+        <strong>🕒 SLA Requirements:</strong><br>
+        ${context.slaRequirements}
+      </div>
+      
+      <p><strong>🚨 Required Actions:</strong></p>
+      <ol>
+        <li>Immediately review the ticket</li>
+        <li>Escalate to supervisor if needed</li>
+        <li>Contact the user to apologize</li>
+        <li>Provide revised timeline</li>
+        <li>Document breach in system</li>
+      </ol>
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="${context.ticketUrl}" class="button" style="color: white; text-decoration: none;">
+          Take Action Now
+        </a>
+      </div>
+      
+      ${context.escalationInfo ? `
+      <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 5px; padding: 15px; margin: 15px 0;">
+        <strong>📈 Escalation Information:</strong><br>
+        ${context.escalationInfo}
+      </div>
+      ` : ''}
+      
+      <p><strong>📞 Contact Information:</strong><br>
+      Supervisor: ${context.supervisorContact || 'N/A'}<br>
+      IT Manager: ${context.managerContact || 'N/A'}</p>
+      
+      <p style="margin-top: 30px; font-size: 12px; color: #6c757d;">
+        <strong>Note:</strong> This breach will be logged in performance metrics and may affect SLA compliance reports.
+      </p>
+    </div>
+    
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} Bugema University IT Support</p>
+      <p>This is an automated SLA compliance alert.</p>
+      <p>For escalation: <a href="mailto:sla@bugemauniv.ac.ug">sla@bugemauniv.ac.ug</a></p>
+    </div>
+  </div>
+</body>
+</html>
+`
     };
 
     return templates[template] || `<p>${context.message || 'Notification from Bugema University IT Support'}</p>`;
@@ -707,7 +1304,236 @@ Bugema University IT Support Team
 
 -----------------------------------
 Contact: itsupport@bugema.ac.ug
-      `
+      `,
+      ticketCreated: `
+BUGEMA UNIVERSITY IT SUPPORT SYSTEM
+===================================
+
+🎫 TICKET CREATED SUCCESSFULLY
+
+Hello ${context.name || 'User'}!
+
+Your support ticket has been created successfully.
+
+TICKET DETAILS:
+- Ticket Number: ${context.ticketNumber}
+- Title: ${context.title}
+- Category: ${context.category}
+- Priority: ${context.priority}
+- Status: ${context.status || 'Open'}
+- Created: ${new Date(context.createdAt).toLocaleString()}
+
+VIEW TICKET: ${context.ticketUrl}
+
+📞 Immediate Assistance:
+Email: itsupport@bugemauniv.ac.ug
+Phone: 0784845785
+
+Best regards,
+Bugema University IT Support Team
+
+-----------------------------------
+Automated notification - Do not reply
+`,
+
+ticketAssigned: `
+BUGEMA UNIVERSITY IT SUPPORT SYSTEM
+===================================
+
+🎯 NEW TICKET ASSIGNED
+
+Hello ${context.technicianName || 'Technician'}!
+
+A new ticket has been assigned to you.
+
+TICKET DETAILS:
+- Ticket: ${context.ticketNumber}
+- Title: ${context.title}
+- Category: ${context.category}
+- Priority: ${context.priority}
+- Submitted by: ${context.submittedBy}
+- Department: ${context.department || 'N/A'}
+
+DESCRIPTION:
+${context.description}
+
+${context.dueDate ? `
+⚠️ RESPONSE DEADLINE: ${new Date(context.dueDate).toLocaleString()}
+Please respond before this deadline to meet SLA requirements.
+` : ''}
+
+VIEW TICKET: ${context.ticketUrl}
+
+REQUIRED ACTIONS:
+1. Review ticket details
+2. Acknowledge assignment
+3. Contact user if needed
+4. Begin investigation
+5. Update ticket status
+
+Best regards,
+Bugema University IT Support Management
+
+-----------------------------------
+Automated assignment notification
+`,
+
+ticketStatusUpdate: `
+BUGEMA UNIVERSITY IT SUPPORT SYSTEM
+===================================
+
+📊 TICKET STATUS UPDATE
+
+Hello ${context.userName}!
+
+Your ticket status has been updated.
+
+TICKET: ${context.ticketNumber} - ${context.title}
+STATUS: ${context.oldStatus} → ${context.newStatus}
+
+${context.updateNotes ? `
+UPDATE NOTES:
+${context.updateNotes}
+` : ''}
+
+${context.updatedBy ? `Updated by: ${context.updatedBy}` : ''}
+
+VIEW UPDATED TICKET: ${context.ticketUrl}
+
+${context.contactInfo ? `
+📞 Contact: ${context.contactInfo}
+` : ''}
+
+Best regards,
+Bugema University IT Support Team
+
+-----------------------------------
+Automated status update
+`,
+
+ticketResolved: `
+BUGEMA UNIVERSITY IT SUPPORT SYSTEM
+===================================
+
+✅ TICKET RESOLVED
+
+Hello ${context.userName}!
+
+Your support ticket has been resolved.
+
+TICKET: ${context.ticketNumber} - ${context.title}
+RESOLVED BY: ${context.resolvedBy}
+RESOLUTION TIME: ${context.resolutionTime}
+
+RESOLUTION DETAILS:
+${context.resolutionDetails}
+
+STATISTICS:
+- Time to Resolution: ${context.resolutionTime}
+- Status: Resolved
+${context.slaMet !== undefined ? `- SLA Compliance: ${context.slaMet ? 'Met' : 'Breached'}` : ''}
+
+📝 FEEDBACK REQUESTED:
+Please provide feedback at: ${context.feedbackUrl}
+
+Note: Ticket will auto-close in 7 days unless reopened.
+
+VIEW COMPLETE RESOLUTION: ${context.ticketUrl}
+
+🔧 Further Assistance:
+1. Add a comment to the ticket
+2. Contact the technician directly
+3. Reopen ticket if needed
+
+Best regards,
+Bugema University IT Support Team
+
+-----------------------------------
+Automated resolution notification
+`,
+
+newComment: `
+BUGEMA UNIVERSITY IT SUPPORT SYSTEM
+===================================
+
+💬 NEW COMMENT ADDED
+
+Hello ${context.recipientName}!
+
+A new comment has been added to your ticket.
+
+TICKET: ${context.ticketNumber} - ${context.ticketTitle}
+COMMENTER: ${context.commenterName} ${context.isInternal ? '(Internal Note)' : ''}
+TIME: ${new Date(context.commentTime).toLocaleString()}
+
+COMMENT:
+${context.commentText}
+
+${context.isInternal ? '⚠️ NOTE: This is an internal comment visible only to IT staff.' : ''}
+
+VIEW TICKET: ${context.ticketUrl}
+
+${context.canReply ? `
+💡 Need to respond?
+You can reply directly in the ticket or contact the commenter.
+
+CONTACT INFORMATION:
+Commenter: ${context.commenterName}
+${context.commenterEmail ? `Email: ${context.commenterEmail}` : ''}
+${context.commenterPhone ? `Phone: ${context.commenterPhone}` : ''}
+` : ''}
+
+Best regards,
+Bugema University IT Support Team
+
+-----------------------------------
+Automated comment notification
+`,
+
+slaBreachAlert: `
+BUGEMA UNIVERSITY IT SUPPORT SYSTEM
+===================================
+
+⚠️ SLA BREACH ALERT
+
+URGENT: Service Level Agreement Breach
+
+TICKET: ${context.ticketNumber} - ${context.title}
+BREACH TYPE: ${context.breachType}
+BREACHED AT: ${new Date(context.breachTime).toLocaleString()}
+TARGET TIME: ${context.targetTime}
+ACTUAL TIME: ${context.actualTime}
+DELAY: ${context.delayAmount}
+
+ASSIGNED TECHNICIAN: ${context.assignedTo || 'Unassigned'}
+PRIORITY: ${context.priority}
+
+🚨 REQUIRED ACTIONS:
+1. Immediately review the ticket
+2. Escalate to supervisor if needed
+3. Contact the user to apologize
+4. Provide revised timeline
+5. Document breach in system
+
+VIEW TICKET: ${context.ticketUrl}
+
+${context.escalationInfo ? `
+ESCALATION INFORMATION:
+${context.escalationInfo}
+` : ''}
+
+CONTACT INFORMATION:
+Supervisor: ${context.supervisorContact || 'N/A'}
+IT Manager: ${context.managerContact || 'N/A'}
+
+Note: This breach will be logged in performance metrics.
+
+Best regards,
+SLA Compliance System
+
+-----------------------------------
+Automated SLA alert - Immediate action required
+`
     };
 
     return textVersions[template] || 'Notification from Bugema University IT Support System';
@@ -837,6 +1663,92 @@ Contact: itsupport@bugema.ac.ug
     };
   }
 
+  /**
+ * Send ticket created confirmation email
+ */
+async sendTicketCreatedEmail(to, name, ticketData) {
+  return this.sendEmail({
+    to,
+    subject: `🎫 Ticket Created: ${ticketData.ticketNumber} - Bugema University IT Support`,
+    template: 'ticketCreated',
+    context: {
+      name,
+      ...ticketData
+    }
+  });
+}
+
+/**
+ * Send ticket assigned notification
+ */
+async sendTicketAssignedEmail(to, technicianName, ticketData) {
+  return this.sendEmail({
+    to,
+    subject: `🎯 New Ticket Assigned: ${ticketData.ticketNumber}`,
+    template: 'ticketAssigned',
+    context: {
+      technicianName,
+      ...ticketData
+    }
+  });
+}
+
+/**
+ * Send ticket status update
+ */
+async sendTicketStatusUpdateEmail(to, userName, updateData) {
+  return this.sendEmail({
+    to,
+    subject: `📊 Ticket Status Update: ${updateData.ticketNumber}`,
+    template: 'ticketStatusUpdate',
+    context: {
+      userName,
+      ...updateData
+    }
+  });
+}
+
+/**
+ * Send ticket resolution notification
+ */
+async sendTicketResolvedEmail(to, userName, resolutionData) {
+  return this.sendEmail({
+    to,
+    subject: `✅ Ticket Resolved: ${resolutionData.ticketNumber} - ${resolutionData.title}`,
+    template: 'ticketResolved',
+    context: {
+      userName,
+      ...resolutionData
+    }
+  });
+}
+
+/**
+ * Send new comment notification
+ */
+async sendNewCommentEmail(to, recipientName, commentData) {
+  return this.sendEmail({
+    to,
+    subject: `💬 New Comment on Ticket: ${commentData.ticketNumber}`,
+    template: 'newComment',
+    context: {
+      recipientName,
+      ...commentData
+    }
+  });
+}
+
+/**
+ * Send SLA breach alert
+ */
+async sendSLABreachAlert(to, breachData) {
+  return this.sendEmail({
+    to,
+    subject: `⚠️ SLA BREACH: ${breachData.ticketNumber} - ${breachData.breachType}`,
+    template: 'slaBreachAlert',
+    context: breachData
+  });
+}
   /**
    * Clear email queue (useful for testing/debugging)
    * 

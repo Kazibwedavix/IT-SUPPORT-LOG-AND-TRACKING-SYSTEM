@@ -63,41 +63,51 @@ const ForgotPassword = () => {
     if (success) setSuccess('');
   };
 
-  /**
-   * Handles form submission
-   */
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setSuccess('');
-    setLoading(true);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setSuccess('');
+  setLoading(true);
 
-    // Validate email
-    if (!email.trim()) {
-      setError('Email address is required');
-      setLoading(false);
-      return;
-    }
+  // Validate email
+  if (!email.trim()) {
+    setError('Email address is required');
+    setLoading(false);
+    return;
+  }
 
-    if (!validateEmail(email)) {
-      setError('Please enter a valid email address');
-      setLoading(false);
-      return;
-    }
+  if (!validateEmail(email)) {
+    setError('Please enter a valid email address');
+    setLoading(false);
+    return;
+  }
 
-    try {
-      const response = await authService.forgotPassword(email.trim());
+  try {
+    const response = await authService.forgotPassword(email.trim());
 
+    // Handle both success cases (real success and security success)
+    if (response.success) {
       setSuccess(response.message);
       setIsSubmitted(true);
-
-    } catch (error) {
-      console.error('Forgot password error:', error);
-      setError(error.message || 'Failed to send reset email. Please try again.');
-    } finally {
-      setLoading(false);
+    } else {
+      setError(response.message || 'Failed to send reset email');
     }
-  };
+
+  } catch (error) {
+    console.error('Forgot password error:', error);
+    
+    // Check if it's a security response (email not found but we return success)
+    if (error.response?.status === 404) {
+      // For security, show success message even if email not found
+      setSuccess('If an account exists with this email, a password reset link has been sent');
+      setIsSubmitted(true);
+    } else {
+      setError(error.message || 'Failed to send reset email. Please try again.');
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
   /**
    * Handles back to login
