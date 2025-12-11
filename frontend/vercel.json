@@ -11,15 +11,26 @@
   ],
   "routes": [
     {
+      "src": "/(.*\\.(js|css|json|ico|png|jpg|svg|woff|woff2|ttf|eot))$",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "dest": "/$1"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/manifest.json"
+    },
+    {
+      "src": "/asset-manifest.json",
+      "dest": "/asset-manifest.json"
+    },
+    {
       "src": "/(.*)",
       "dest": "/"
     }
   ],
-  "env": {
-    "REACT_APP_API_URL": "https://it-support-log-and-tracking-system-3.onrender.com"
-  },
-  "buildCommand": "CI=false npm run build",
+  "buildCommand": "CI=false GENERATE_SOURCEMAP=false PUBLIC_URL=. npm run build",
   "installCommand": "npm install --legacy-peer-deps",
-  "outputDirectory": "build",
-  "framework": "create-react-app"
+  "outputDirectory": "build"
 }

@@ -331,407 +331,251 @@ class AuthService {
     }
   }
 
- /**
- * Change password via API (UPDATED - remove passwordData wrapper)
- */
-async changePassword(currentPassword, newPassword) {
-  try {
-    console.log('🔐 [AuthService] Change password request');
-    
-    const response = await apiService.post(`${this.baseUrl}/change-password`, {
-      currentPassword,
-      newPassword
-    });
-
-    const { success, message } = response.data;
-    
-    if (!success) {
-      throw new APIError(message || 'Failed to change password', 400);
-    }
-
-    console.log('✅ [AuthService] Password changed successfully');
-    return { 
-      success: true, 
-      message: message || 'Password changed successfully' 
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Change password error:', error);
-    
-    if (error instanceof APIError || error instanceof AuthError) {
-      throw error;
-    }
-    
-    throw new APIError(error.message || 'Failed to change password', 400);
-  }
-}
- /**
- * Forgot Password - Request password reset email
- * @param {string} email - User's email address
- * @returns {Promise<Object>} - Response data
- */
-async forgotPassword(email) {
-  try {
-    console.log('🔑 [AuthService] Forgot password request:', { email: email?.substring(0, 5) + '...' });
-    
-    const response = await apiService.post(`${this.baseUrl}/forgot-password`, { 
-      email: email.trim().toLowerCase() 
-    });
-
-    const { success, message, emailSent } = response.data;
-    
-    if (!success) {
-      throw new APIError(message || 'Failed to send reset email', 400);
-    }
-
-    console.log('✅ [AuthService] Reset email sent');
-    return { 
-      success: true, 
-      message: message || 'Password reset email sent successfully',
-      emailSent: emailSent || false
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Forgot password error:', error);
-    
-    // Special handling for 404 - email not found
-    if (error.response?.status === 404) {
-      // For security, return success even if email not found
-      return {
-        success: true,
-        message: 'If an account exists with this email, a password reset link has been sent',
-        emailSent: false
-      };
-    }
-    
-    if (error instanceof APIError) {
-      throw error;
-    }
-    
-    throw new APIError(error.message || 'Failed to send reset email', 500);
-  }
-}
-
-/**
- * Validate password reset token
- * @param {string} token - Reset token from URL
- * @returns {Promise<Object>} - Validation result
- */
-async validateResetToken(token) {
-  try {
-    console.log('🔐 [AuthService] Validating reset token');
-    
-    const response = await apiService.get(`${this.baseUrl}/validate-reset-token/${token}`);
-    
-    const { success, valid, message, email } = response.data;
-    
-    return { 
-      success: success || false, 
-      valid: valid || false, 
-      message, 
-      email 
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Validate reset token error:', error);
-    
-    // Return false for invalid tokens
-    return {
-      success: false,
-      valid: false,
-      message: error.message || 'Invalid or expired reset token',
-      email: null
-    };
-  }
-}
   /**
- * Reset password with token
- * @param {string} token - Reset token from URL
- * @param {string} password - New password
- * @returns {Promise<Object>} - Response data
- */
-async resetPassword(token, password) {
-  try {
-    console.log('🔄 [AuthService] Reset password request');
-    
-    const response = await apiService.post(`${this.baseUrl}/reset-password/${token}`, { 
-      password 
-    });
+   * Change password via API
+   */
+  async changePassword(currentPassword, newPassword) {
+    try {
+      console.log('🔐 [AuthService] Change password request');
+      
+      const response = await apiService.post(`${this.baseUrl}/change-password`, {
+        currentPassword,
+        newPassword
+      });
 
-    const { success, message } = response.data;
-    
-    if (!success) {
-      throw new APIError(message || 'Failed to reset password', 400);
-    }
+      const { success, message } = response.data;
+      
+      if (!success) {
+        throw new APIError(message || 'Failed to change password', 400);
+      }
 
-    console.log('✅ [AuthService] Password reset successful');
-    return { 
-      success: true, 
-      message: message || 'Password reset successfully' 
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Reset password error:', error);
-    
-    if (error instanceof APIError) {
-      throw error;
-    }
-    
-    throw new APIError(error.message || 'Failed to reset password', 500);
-  }
-}
-
-
-  // ============================================
-// UPDATE THESE METHODS IN YOUR EXISTING authService.js
-// ============================================
-
-/**
- * Forgot Password - Request password reset email
- * @param {string} email - User's email address
- * @returns {Promise<Object>} - Response data
- */
-async forgotPassword(email) {
-  try {
-    console.log('🔑 [AuthService] Forgot password request:', { email: email?.substring(0, 5) + '...' });
-    
-    const response = await apiService.post(`${this.baseUrl}/forgot-password`, { 
-      email: email.trim().toLowerCase() 
-    });
-
-    const { success, message, emailSent } = response.data;
-    
-    if (!success) {
-      throw new APIError(message || 'Failed to send reset email', 400);
-    }
-
-    console.log('✅ [AuthService] Reset email sent');
-    return { 
-      success: true, 
-      message: message || 'Password reset email sent successfully',
-      emailSent: emailSent || false
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Forgot password error:', error);
-    
-    // Special handling for 404 - email not found
-    if (error.response?.status === 404) {
-      // For security, return success even if email not found
-      return {
-        success: true,
-        message: 'If an account exists with this email, a password reset link has been sent',
-        emailSent: false
+      console.log('✅ [AuthService] Password changed successfully');
+      return { 
+        success: true, 
+        message: message || 'Password changed successfully' 
       };
+      
+    } catch (error) {
+      console.error('❌ [AuthService] Change password error:', error);
+      
+      if (error instanceof APIError || error instanceof AuthError) {
+        throw error;
+      }
+      
+      throw new APIError(error.message || 'Failed to change password', 400);
     }
-    
-    if (error instanceof APIError) {
-      throw error;
-    }
-    
-    throw new APIError(error.message || 'Failed to send reset email', 500);
   }
-}
 
-/**
- * Validate password reset token
- * @param {string} token - Reset token from URL
- * @returns {Promise<Object>} - Validation result
- */
-async validateResetToken(token) {
-  try {
-    console.log('🔐 [AuthService] Validating reset token');
-    
-    const response = await apiService.get(`${this.baseUrl}/validate-reset-token/${token}`);
-    
-    const { success, valid, message, email } = response.data;
-    
-    return { 
-      success: success || false, 
-      valid: valid || false, 
-      message, 
-      email 
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Validate reset token error:', error);
-    
-    // Return false for invalid tokens
-    return {
-      success: false,
-      valid: false,
-      message: error.message || 'Invalid or expired reset token',
-      email: null
-    };
-  }
-}
+  /**
+   * Forgot Password - Request password reset email
+   */
+  async forgotPassword(email) {
+    try {
+      console.log('🔑 [AuthService] Forgot password request:', { email: email?.substring(0, 5) + '...' });
+      
+      const response = await apiService.post(`${this.baseUrl}/forgot-password`, { 
+        email: email.trim().toLowerCase() 
+      });
 
-/**
- * Reset password with token
- * @param {string} token - Reset token from URL
- * @param {string} password - New password
- * @returns {Promise<Object>} - Response data
- */
-async resetPassword(token, password) {
-  try {
-    console.log('🔄 [AuthService] Reset password request');
-    
-    const response = await apiService.post(`${this.baseUrl}/reset-password/${token}`, { 
-      password 
-    });
+      const { success, message, emailSent } = response.data;
+      
+      if (!success) {
+        throw new APIError(message || 'Failed to send reset email', 400);
+      }
 
-    const { success, message } = response.data;
-    
-    if (!success) {
-      throw new APIError(message || 'Failed to reset password', 400);
-    }
-
-    console.log('✅ [AuthService] Password reset successful');
-    return { 
-      success: true, 
-      message: message || 'Password reset successfully' 
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Reset password error:', error);
-    
-    if (error instanceof APIError) {
-      throw error;
-    }
-    
-    throw new APIError(error.message || 'Failed to reset password', 500);
-  }
-}
-
-/**
- * Verify email with token (GET request - updated from POST)
- * @param {string} token - Verification token from URL
- * @returns {Promise<Object>} - Verification result
- */
-async verifyEmail(token) {
-  try {
-    console.log('📧 [AuthService] Verify email request');
-    
-    const response = await apiService.get(`${this.baseUrl}/verify-email/${token}`);
-
-    const { success, data, message, redirectUrl } = response.data;
-    
-    if (!success) {
-      throw new APIError(message || 'Verification failed', 400);
-    }
-
-    console.log('✅ [AuthService] Email verified successfully');
-    return { 
-      success: true, 
-      data: data || {},
-      message: message || 'Email verified successfully',
-      redirectUrl: redirectUrl || null
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Verify email error:', error);
-    
-    // Special handling for invalid/expired tokens
-    if (error.response?.status === 400) {
-      return {
-        success: false,
-        data: {},
-        message: error.response.data?.message || 'Invalid or expired verification token',
-        redirectUrl: null
+      console.log('✅ [AuthService] Reset email sent');
+      return { 
+        success: true, 
+        message: message || 'Password reset email sent successfully',
+        emailSent: emailSent || false
       };
-    }
-    
-    if (error instanceof APIError) {
-      throw error;
-    }
-    
-    throw new APIError(error.message || 'Email verification failed', 500);
-  }
-}
-
-/**
- * Resend verification email
- * @param {string} email - User's email address
- * @returns {Promise<Object>} - Response data
- */
-async resendVerification(email) {
-  try {
-    console.log('📧 [AuthService] Resend verification request');
-    
-    const response = await apiService.post(`${this.baseUrl}/resend-verification`, { 
-      email: email.trim().toLowerCase() 
-    });
-
-    const { success, message, emailSent } = response.data;
-    
-    if (!success) {
-      throw new APIError(message || 'Failed to resend verification email', 400);
-    }
-
-    console.log('✅ [AuthService] Verification email resent');
-    return { 
-      success: true, 
-      message: message || 'Verification email sent successfully',
-      emailSent: emailSent || false
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Resend verification error:', error);
-    
-    // Special handling for already verified emails
-    if (error.response?.status === 400) {
-      const errorMessage = error.response.data?.message || '';
-      if (errorMessage.includes('already verified')) {
+      
+    } catch (error) {
+      console.error('❌ [AuthService] Forgot password error:', error);
+      
+      // Special handling for 404 - email not found
+      if (error.response?.status === 404) {
+        // For security, return success even if email not found
         return {
-          success: false,
-          message: 'Email is already verified',
+          success: true,
+          message: 'If an account exists with this email, a password reset link has been sent',
           emailSent: false
         };
       }
+      
+      if (error instanceof APIError) {
+        throw error;
+      }
+      
+      throw new APIError(error.message || 'Failed to send reset email', 500);
     }
+  }
+
+  /**
+   * Validate password reset token
+   */
+/**
+ * Validate password reset token (primary method)
+ */
+async validateResetToken(token) {
+  try {
+    console.log('🔐 [AuthService] Validating reset token');
     
-    if (error instanceof APIError) {
-      throw error;
-    }
+    const response = await apiService.get(`${this.baseUrl}/validate-reset-token/${token}`);
     
-    throw new APIError(error.message || 'Failed to resend verification email', 500);
+    const { success, valid, message, email } = response.data;
+    
+    return { 
+      success: success || false, 
+      valid: valid || false, 
+      message, 
+      email 
+    };
+    
+  } catch (error) {
+    console.error('❌ [AuthService] Validate reset token error:', error);
+    
+    // Return false for invalid tokens
+    return {
+      success: false,
+      valid: false,
+      message: error.message || 'Invalid or expired reset token',
+      email: null
+    };
   }
 }
 
 /**
- * Change password via API (UPDATED - remove passwordData wrapper)
+ * Verify reset token (alias for backward compatibility)
  */
-async changePassword(currentPassword, newPassword) {
-  try {
-    console.log('🔐 [AuthService] Change password request');
-    
-    const response = await apiService.post(`${this.baseUrl}/change-password`, {
-      currentPassword,
-      newPassword
-    });
-
-    const { success, message } = response.data;
-    
-    if (!success) {
-      throw new APIError(message || 'Failed to change password', 400);
-    }
-
-    console.log('✅ [AuthService] Password changed successfully');
-    return { 
-      success: true, 
-      message: message || 'Password changed successfully' 
-    };
-    
-  } catch (error) {
-    console.error('❌ [AuthService] Change password error:', error);
-    
-    if (error instanceof APIError || error instanceof AuthError) {
-      throw error;
-    }
-    
-    throw new APIError(error.message || 'Failed to change password', 400);
-  }
+async verifyResetToken(token) {
+  console.log('⚠️ [AuthService] verifyResetToken is deprecated, use validateResetToken instead');
+  return this.validateResetToken(token);
 }
+  /**
+   * Reset password with token
+   */
+  async resetPassword(token, password) {
+    try {
+      console.log('🔄 [AuthService] Reset password request');
+      
+      const response = await apiService.post(`${this.baseUrl}/reset-password/${token}`, { 
+        password 
+      });
+
+      const { success, message } = response.data;
+      
+      if (!success) {
+        throw new APIError(message || 'Failed to reset password', 400);
+      }
+
+      console.log('✅ [AuthService] Password reset successful');
+      return { 
+        success: true, 
+        message: message || 'Password reset successfully' 
+      };
+      
+    } catch (error) {
+      console.error('❌ [AuthService] Reset password error:', error);
+      
+      if (error instanceof APIError) {
+        throw error;
+      }
+      
+      throw new APIError(error.message || 'Failed to reset password', 500);
+    }
+  }
+
+  /**
+   * Verify email with token
+   */
+  async verifyEmail(token) {
+    try {
+      console.log('📧 [AuthService] Verify email request');
+      
+      const response = await apiService.get(`${this.baseUrl}/verify-email/${token}`);
+      
+      console.log('📥 [AuthService] Verification API response:', response.data);
+
+      const { success, data, message, redirectUrl } = response.data;
+      
+      if (!success) {
+        // Throw error with proper message
+        throw new APIError(message || 'Email verification failed', 400);
+      }
+
+      console.log('✅ [AuthService] Email verified successfully');
+      return { 
+        success: true, 
+        data: data || {},
+        message: message || 'Email verified successfully',
+        redirectUrl: redirectUrl || null
+      };
+      
+    } catch (error) {
+      console.error('❌ [AuthService] Verify email error:', error);
+      
+      // Always throw - don't return { success: false }
+      if (error instanceof APIError) {
+        throw error;
+      }
+      
+      throw new APIError(
+        error.response?.data?.message || 
+        error.message || 
+        'Email verification failed', 
+        error.response?.status || 500
+      );
+    }
+  }
+
+  /**
+   * Resend verification email
+   */
+  async resendVerification(email) {
+    try {
+      console.log('📧 [AuthService] Resend verification request');
+      
+      const response = await apiService.post(`${this.baseUrl}/resend-verification`, { 
+        email: email.trim().toLowerCase() 
+      });
+
+      const { success, message, emailSent } = response.data;
+      
+      if (!success) {
+        throw new APIError(message || 'Failed to resend verification email', 400);
+      }
+
+      console.log('✅ [AuthService] Verification email resent');
+      return { 
+        success: true, 
+        message: message || 'Verification email sent successfully',
+        emailSent: emailSent || false
+      };
+      
+    } catch (error) {
+      console.error('❌ [AuthService] Resend verification error:', error);
+      
+      // Special handling for already verified emails
+      if (error.response?.status === 400) {
+        const errorMessage = error.response.data?.message || '';
+        if (errorMessage.includes('already verified')) {
+          return {
+            success: false,
+            message: 'Email is already verified',
+            emailSent: false
+          };
+        }
+      }
+      
+      if (error instanceof APIError) {
+        throw error;
+      }
+      
+      throw new APIError(error.message || 'Failed to resend verification email', 500);
+    }
+  }
+
   /**
    * Get authentication token
    */

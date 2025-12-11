@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Added useRef
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import authService from '../services/authService';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -10,9 +10,16 @@ const EmailVerification = () => {
   const [status, setStatus] = useState('verifying'); // 'verifying', 'success', 'error'
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const hasVerified = useRef(false); // Track if verification already attempted
 
   useEffect(() => {
     const verifyEmail = async () => {
+      // Prevent duplicate verification attempts
+      if (hasVerified.current) {
+        console.log('Verification already attempted, skipping...');
+        return;
+      }
+
       if (!token) {
         setStatus('error');
         setMessage('Invalid verification link. No token provided.');
@@ -22,7 +29,11 @@ const EmailVerification = () => {
 
       try {
         setIsLoading(true);
+        hasVerified.current = true; // Mark as attempted
+        console.log('Starting email verification for token:', token);
+        
         const response = await authService.verifyEmail(token);
+        console.log('Verification response:', response);
 
         if (response.success) {
           setStatus('success');
@@ -33,21 +44,36 @@ const EmailVerification = () => {
         }
       } catch (error) {
         console.error('Email verification error:', error);
-        setStatus('error');
-        setMessage(
-          error.response?.data?.message ||
-          'Email verification failed. Please try again or request a new verification email.'
-        );
+        
+        // Handle "already verified" case gracefully
+        if (error.message?.includes('already verified') || 
+            error.response?.data?.message?.includes('already verified')) {
+          setStatus('success');
+          setMessage('Your email has already been verified. You can log in to your account.');
+        } else if (error.message?.includes('Invalid or expired')) {
+          setStatus('error');
+          setMessage('This verification link has expired or is invalid. Please request a new verification email.');
+        } else {
+          setStatus('error');
+          setMessage(
+            error.response?.data?.message ||
+            'Email verification failed. Please try again or request a new verification email.'
+          );
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
     verifyEmail();
+    
+    // Cleanup function (optional)
+    return () => {
+      console.log('EmailVerification component cleanup');
+    };
   }, [token]);
 
   const handleResendVerification = async () => {
-    // This would require the user's email, so we'll redirect to login
     navigate('/login', {
       state: {
         message: 'Please log in to request a new verification email.',

@@ -43,6 +43,7 @@ const ResetPassword = () => {
   const passwordRef = useRef(null);
   const navigate = useNavigate();
   const { token } = useParams();
+  const hasVerifiedToken = useRef(false); // Add this to prevent duplicate calls
 
   // Verify token on mount
   useEffect(() => {
@@ -60,8 +61,13 @@ const ResetPassword = () => {
    * Verifies the reset token
    */
   const verifyResetToken = async () => {
+    // Prevent duplicate calls in StrictMode
+    if (hasVerifiedToken.current) return;
+    hasVerifiedToken.current = true;
+
     try {
-      const response = await authService.verifyResetToken(token);
+      // FIX: Use validateResetToken instead of verifyResetToken
+      const response = await authService.validateResetToken(token);
       setTokenValid(response.valid);
       
       if (!response.valid) {
@@ -189,12 +195,10 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await authService.resetPassword(token, {
-        password: formData.password,
-        confirmPassword: formData.confirmPassword
-      });
-
-      setSuccess(response.message);
+      // FIX: Remove the object wrapper, just pass password
+      const response = await authService.resetPassword(token, formData.password);
+      
+      setSuccess(response.message || 'Password reset successfully!');
       
       // Redirect to login after 3 seconds
       setTimeout(() => {
