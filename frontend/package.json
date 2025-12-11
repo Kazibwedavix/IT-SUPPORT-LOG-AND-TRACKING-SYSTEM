@@ -3,12 +3,18 @@
   "version": "2.0.0",
   "description": "Bugema University IT Support System Frontend",
   "main": "src/index.js",
+  "homepage": ".",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "prebuild": "chmod +x node_modules/.bin/react-scripts 2>/dev/null || true"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.12",
