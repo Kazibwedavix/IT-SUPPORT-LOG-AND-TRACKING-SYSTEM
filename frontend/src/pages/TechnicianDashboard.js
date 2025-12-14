@@ -8,6 +8,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import ticketService from '../services/ticketService';
 import userService from '../services/userService';
 import '../styles/Dashboard.css';
+import technicianService from '../services/technicianService';
 
 /**
  * TechnicianDashboard Component

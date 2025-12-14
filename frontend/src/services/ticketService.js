@@ -3,7 +3,7 @@ import api from './api';
 const ticketService = {
   // Basic Ticket Operations
   createTicket: async (ticketData) => {
-    const response = await api.post('/tickets', ticketData);
+    const response = await api.post('/api/tickets', ticketData); // Changed
     return response.data;
   },
 
@@ -21,17 +21,17 @@ const ticketService = {
       }
     });
     
-    const response = await api.get(`/tickets?${params}`);
+    const response = await api.get(`/api/tickets?${params}`); // Changed
     return response.data;
   },
 
   getTicket: async (id) => {
-    const response = await api.get(`/tickets/${id}`);
+    const response = await api.get(`/api/tickets/${id}`); // Changed
     return response.data;
   },
 
   updateTicket: async (id, updates) => {
-    const response = await api.put(`/tickets/${id}`, updates);
+    const response = await api.put(`/api/tickets/${id}`, updates); // Changed
     return response.data;
   },
 
@@ -47,95 +47,95 @@ const ticketService = {
       }
     });
     
-    const response = await api.get(`/tickets/admin/all?${params}`);
+    const response = await api.get(`/api/tickets/admin/all?${params}`); // Changed
     return response.data;
   },
 
   // Delete ticket (admin only)
   deleteTicket: async (id) => {
-    const response = await api.delete(`/tickets/admin/${id}`);
+    const response = await api.delete(`/api/tickets/admin/${id}`); // Changed
     return response.data;
   },
 
   // Bulk delete tickets (admin only)
   bulkDeleteTickets: async (ticketIds) => {
-    const response = await api.post('/tickets/admin/bulk-delete', { ticketIds });
+    const response = await api.post('/api/tickets/admin/bulk-delete', { ticketIds }); // Changed
     return response.data;
   },
 
   // Force assign ticket (admin override)
   forceAssignTicket: async (ticketId, technicianId, reason = '') => {
-    const response = await api.put(`/tickets/admin/${ticketId}/assign`, {
+    const response = await api.put(`/api/tickets/admin/${ticketId}/assign`, {
       technicianId,
       reason,
       forced: true
-    });
+    }); // Changed
     return response.data;
   },
 
   // Escalate ticket (admin only)
   escalateTicket: async (ticketId, priority, reason = '') => {
-    const response = await api.put(`/tickets/admin/${ticketId}/escalate`, {
+    const response = await api.put(`/api/tickets/admin/${ticketId}/escalate`, {
       priority,
       reason
-    });
+    }); // Changed
     return response.data;
   },
 
   // ==================== BULK OPERATIONS ====================
 
   bulkUpdateStatus: async (ticketIds, status, notes = '') => {
-    const response = await api.patch('/tickets/bulk/status', {
+    const response = await api.patch('/api/tickets/bulk/status', {
       ticketIds,
       status,
       notes
-    });
+    }); // Changed
     return response.data;
   },
 
   bulkAssignTickets: async (ticketIds, assigneeId, notes = '') => {
-    const response = await api.patch('/tickets/bulk/assign', {
+    const response = await api.patch('/api/tickets/bulk/assign', {
       ticketIds,
       assigneeId,
       notes
-    });
+    }); // Changed
     return response.data;
   },
 
   bulkUpdatePriority: async (ticketIds, priority, notes = '') => {
-    const response = await api.patch('/tickets/bulk/priority', {
+    const response = await api.patch('/api/tickets/bulk/priority', {
       ticketIds,
       priority,
       notes
-    });
+    }); // Changed
     return response.data;
   },
 
   // ==================== ANALYTICS & REPORTING ====================
 
   getTicketStats: async (timeRange = '30d') => {
-    const response = await api.get(`/tickets/stats?range=${timeRange}`);
+    const response = await api.get(`/api/tickets/stats?range=${timeRange}`); // Changed
     return response.data;
   },
 
   // Admin analytics - comprehensive system-wide stats
   getSystemAnalytics: async (period = 'month', department = 'all') => {
-    const response = await api.get(`/tickets/admin/analytics?period=${period}&department=${department}`);
+    const response = await api.get(`/api/tickets/admin/analytics?period=${period}&department=${department}`); // Changed
     return response.data;
   },
 
   getDepartmentStats: async () => {
-    const response = await api.get('/tickets/analytics/departments');
+    const response = await api.get('/api/tickets/analytics/departments'); // Changed
     return response.data;
   },
 
   getTechnicianPerformance: async (period = 'month') => {
-    const response = await api.get(`/tickets/analytics/technicians?period=${period}`);
+    const response = await api.get(`/api/tickets/analytics/technicians?period=${period}`); // Changed
     return response.data;
   },
 
   getSLACompliance: async (period = 'month') => {
-    const response = await api.get(`/tickets/analytics/sla?period=${period}`);
+    const response = await api.get(`/api/tickets/analytics/sla?period=${period}`); // Changed
     return response.data;
   },
 
@@ -148,9 +148,9 @@ const ticketService = {
     });
     params.append('format', format);
     
-    const response = await api.get(`/tickets/export?${params}`, {
+    const response = await api.get(`/api/tickets/export?${params}`, {
       responseType: 'blob'
-    });
+    }); // Changed
     return response.data;
   },
 
@@ -162,47 +162,47 @@ const ticketService = {
     });
     params.append('format', format);
     
-    const response = await api.get(`/tickets/admin/export?${params}`, {
+    const response = await api.get(`/api/tickets/admin/export?${params}`, {
       responseType: 'blob'
-    });
+    }); // Changed
     return response.data;
   },
 
   // ==================== COMMENT SYSTEM ====================
 
   addComment: async (ticketId, commentData) => {
-    const response = await api.post(`/tickets/${ticketId}/comments`, commentData);
+    const response = await api.post(`/api/tickets/${ticketId}/comments`, commentData); // Changed
     return response.data;
   },
 
   updateComment: async (ticketId, commentId, updates) => {
-    const response = await api.put(`/tickets/${ticketId}/comments/${commentId}`, updates);
+    const response = await api.put(`/api/tickets/${ticketId}/comments/${commentId}`, updates); // Changed
     return response.data;
   },
 
   deleteComment: async (ticketId, commentId) => {
-    const response = await api.delete(`/tickets/${ticketId}/comments/${commentId}`);
+    const response = await api.delete(`/api/tickets/${ticketId}/comments/${commentId}`); // Changed
     return response.data;
   },
 
   // Admin comment operations
   addInternalNote: async (ticketId, content) => {
-    const response = await api.post(`/tickets/admin/${ticketId}/internal-notes`, {
+    const response = await api.post(`/api/tickets/admin/${ticketId}/internal-notes`, {
       content,
       isInternal: true
-    });
+    }); // Changed
     return response.data;
   },
 
   // ==================== ACTIVITY & AUDIT LOG ====================
 
   getActivities: async (ticketId) => {
-    const response = await api.get(`/tickets/${ticketId}/activities`);
+    const response = await api.get(`/api/tickets/${ticketId}/activities`); // Changed
     return response.data;
   },
 
   getComments: async (ticketId) => {
-    const response = await api.get(`/tickets/${ticketId}/comments`);
+    const response = await api.get(`/api/tickets/${ticketId}/comments`); // Changed
     return response.data;
   },
 
@@ -213,7 +213,7 @@ const ticketService = {
       if (filters[key]) params.append(key, filters[key]);
     });
     
-    const response = await api.get(`/tickets/admin/activity-logs?${params}`);
+    const response = await api.get(`/api/tickets/admin/activity-logs?${params}`); // Changed
     return response.data;
   },
 
@@ -223,28 +223,28 @@ const ticketService = {
     const formData = new FormData();
     formData.append('file', file);
     
-    const response = await api.post(`/tickets/${ticketId}/attachments`, formData, {
+    const response = await api.post(`/api/tickets/${ticketId}/attachments`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    });
+    }); // Changed
     return response.data;
   },
 
   deleteAttachment: async (ticketId, fileId) => {
-    const response = await api.delete(`/tickets/${ticketId}/attachments/${fileId}`);
+    const response = await api.delete(`/api/tickets/${ticketId}/attachments/${fileId}`); // Changed
     return response.data;
   },
 
   // ==================== SLA MANAGEMENT ====================
 
   getSLAStatus: async (ticketId) => {
-    const response = await api.get(`/tickets/${ticketId}/sla`);
+    const response = await api.get(`/api/tickets/${ticketId}/sla`); // Changed
     return response.data;
   },
 
   updateSLAPolicy: async (policyData) => {
-    const response = await api.put('/tickets/admin/sla-policy', policyData);
+    const response = await api.put('/api/tickets/admin/sla-policy', policyData); // Changed
     return response.data;
   },
 
@@ -252,25 +252,25 @@ const ticketService = {
 
   getAvailableTechnicians: async (department = '') => {
     const params = department ? `?department=${department}` : '';
-    const response = await api.get(`/tickets/technicians/available${params}`);
+    const response = await api.get(`/api/tickets/technicians/available${params}`); // Changed
     return response.data;
   },
 
   getTechnicianWorkload: async () => {
-    const response = await api.get('/tickets/admin/technician-workload');
+    const response = await api.get('/api/tickets/admin/technician-workload'); // Changed
     return response.data;
   },
 
   // ==================== NOTIFICATION MANAGEMENT ====================
 
   updateNotificationPreferences: async (preferences) => {
-    const response = await api.put('/users/notifications/preferences', preferences);
+    const response = await api.put('/api/users/notifications/preferences', preferences); // Changed
     return response.data;
   },
 
   // Admin notification controls
   sendSystemNotification: async (notificationData) => {
-    const response = await api.post('/tickets/admin/system-notification', notificationData);
+    const response = await api.post('/api/tickets/admin/system-notification', notificationData); // Changed
     return response.data;
   },
 
@@ -278,23 +278,23 @@ const ticketService = {
 
   // Debug endpoints for development
   debugGetAllTickets: async () => {
-    const response = await api.get('/tickets/debug/all-tickets');
+    const response = await api.get('/api/tickets/debug/all-tickets'); // Changed
     return response.data;
   },
 
   debugTestCreate: async () => {
-    const response = await api.post('/tickets/debug/test-create');
+    const response = await api.post('/api/tickets/debug/test-create'); // Changed
     return response.data;
   },
 
   debugGetSystemStatus: async () => {
-    const response = await api.get('/tickets/debug/status');
+    const response = await api.get('/api/tickets/debug/status'); // Changed
     return response.data;
   },
 
   // System maintenance (admin only)
   runSystemCleanup: async () => {
-    const response = await api.post('/tickets/admin/system-cleanup');
+    const response = await api.post('/api/tickets/admin/system-cleanup'); // Changed
     return response.data;
   },
 

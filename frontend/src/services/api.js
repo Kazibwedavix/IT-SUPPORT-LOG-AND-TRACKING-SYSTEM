@@ -35,7 +35,7 @@ const requestQueue = new Map();
 // Main API Service class
 class APIService {
   constructor() {
-    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002';
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002/api';
     
     this.axios = axios.create({
       baseURL: API_BASE_URL,
