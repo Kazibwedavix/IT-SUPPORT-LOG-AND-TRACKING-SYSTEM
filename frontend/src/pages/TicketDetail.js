@@ -1,22 +1,7 @@
-/**
- * TicketDetail Component - Production Ready
- * 
- * Comprehensive ticket detail view with real-time updates, comments,
- * activity tracking, and full CRUD operations.
- * 
- * Features:
- * - Real ticket data fetching from API
- * - Comments system with internal/external notes
- * - Ticket status management
- * - Role-based permissions
- * - Comprehensive error handling
- * - Activity timeline
- * - SLA tracking
- * - File attachment support
- * 
- * @version 4.0.0
- * @author Bugema University IT Support Team
- */
+//  * 
+//  * @version 4.0.0
+//  * @author Bugema University IT Support Team
+//  */
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -126,9 +111,13 @@ const TicketDetail = () => {
       }
 
       // Check permissions
-      if (!hasPermission()) {
-        throw new Error('PERMISSION_DENIED');
-      }
+    console.log('🔐 Permission check:', {
+  ticketCreatedBy: ticketData.createdBy?._id || ticketData.createdBy,
+  currentUserId: user?._id || user?.id,
+  userRole: user?.role,
+  sameUser: (ticketData.createdBy?._id === user?._id) || (ticketData.createdBy?._id === user?.id),
+  isAdminOrTech: ['admin', 'technician'].includes(user?.role)
+});
 
       setTicket(ticketData);
       

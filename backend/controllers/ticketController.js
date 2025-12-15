@@ -1617,7 +1617,897 @@ class TicketController {
     
     return analytics[0] || {};
   }
+  // Add these methods to your TicketController class
+
+/**
+ * @method exportTickets
+ * @description Export tickets to CSV/Excel
+ */
+static async exportTickets(req, res) {
+  try {
+    const { format = 'csv', filters = {} } = req.body;
+    const userId = req.user.id;
+    const userRole = req.user.role;
+
+    // Build query with role-based permissions
+    const query = this.buildRoleBasedQuery(userId, userRole);
+    this.applyAdvancedFilters(query, filters);
+
+    // Get tickets for export
+    const tickets = await Ticket.find(query)
+      .populate('createdBy', 'firstName lastName email department')
+      .populate('assignedTo', 'firstName lastName email')
+      .select('-comments -attachments -history -__v')
+      .lean();
+
+    // Format data based on export format
+    let exportData;
+    let contentType;
+    let filename;
+
+    if (format === 'csv') {
+      exportData = this.formatTicketsToCSV(tickets);
+      contentType = 'text/csv';
+      filename = `tickets_export_${Date.now()}.csv`;
+    } else if (format === 'excel') {
+      exportData = this.formatTicketsToExcel(tickets);
+      contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      filename = `tickets_export_${Date.now()}.xlsx`;
+    } else if (format === 'json') {
+      exportData = JSON.stringify(tickets, null, 2);
+      contentType = 'application/json';
+      filename = `tickets_export_${Date.now()}.json`;
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid export format',
+        code: 'VALIDATION_ERROR'
+      });
+    }
+
+    // Set headers for file download
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+
+    res.send(exportData);
+
+  } catch (error) {
+    logger.error(`Export tickets error: ${error.message}`, {
+      userId: req.user?.id,
+      error: error.stack
+    });
+
+    res.status(500).json({
+      success: false,
+      error: 'Failed to export tickets',
+      code: 'SERVER_ERROR'
+    });
+  }
+}
+
+/**
+ * @method getTicketPublicStatus
+ * @description Get ticket status for public access (no auth required)
+ */
+static async getTicketPublicStatus(req, res) {
+  try {
+    const { ticketNumber } = req.params;
+
+    if (!ticketNumber) {
+      return res.status(400).json({
+        success: false,
+        error: 'Ticket number is required',
+        code: 'VALIDATION_ERROR'
+      });
+    }
+
+    // Find ticket
+    const ticket = await Ticket.findOne({
+      $or: [
+        { ticketNumber: ticketNumber },
+        { _id: mongoose.Types.ObjectId.isValid(ticketNumber) ? ticketNumber : null }
+      ],
+      isDeleted: false
+    })
+      .populate('createdBy', 'firstName lastName')
+      .populate('assignedTo', 'firstName lastName')
+      .select('ticketNumber title status priority category createdAt updatedAt assignedTo resolvedAt closedAt')
+      .lean();
+
+    if (!ticket) {
+      return res.status(404).json({
+        success: false,
+        error: 'Ticket not found',
+        code: 'TICKET_NOT_FOUND'
+      });
+    }
+
+    // Calculate SLA status for public view
+    const slaStatus = this.calculateSLAStatus(ticket);
+    const isOverdue = this.isTicketOverdue(ticket);
+
+    // Return limited public information
+    res.json({
+      success: true,
+      data: {
+        ticketNumber: ticket.ticketNumber,
+        title: ticket.title,
+        status: ticket.status,
+        priority: ticket.priority,
+        category: ticket.category,
+        createdBy: ticket.createdBy ? {
+          firstName: ticket.createdBy.firstName,
+          lastName: ticket.createdBy.lastName
+        } : null,
+        assignedTo: ticket.assignedTo ? {
+          firstName: ticket.assignedTo.firstName,
+          lastName: ticket.assignedTo.lastName
+        } : null,
+        createdAt: ticket.createdAt,
+        updatedAt: ticket.updatedAt,
+        resolvedAt: ticket.resolvedAt,
+        closedAt: ticket.closedAt,
+        slaStatus,
+        isOverdue,
+        timeline: [
+          {
+            event: 'Created',
+            date: ticket.createdAt,
+            status: 'Open'
+          },
+          ...(ticket.assignedTo ? [{
+            event: 'Assigned',
+            date: ticket.assignedAt,
+            status: 'Assigned'
+          }] : []),
+          ...(ticket.resolvedAt ? [{
+            event: 'Resolved',
+            date: ticket.resolvedAt,
+            status: 'Resolved'
+          }] : []),
+          ...(ticket.closedAt ? [{
+            event: 'Closed',
+            date: ticket.closedAt,
+            status: 'Closed'
+          }] : [])
+        ].filter(item => item.date)
+      },
+      supportContact: {
+        email: 'itsupport@bugemauniv.ac.ug',
+        phone: '0784845785',
+        hours: 'Mon-Fri: 8:00 AM - 5:00 PM'
+      }
+    });
+
+  } catch (error) {
+    logger.error(`Get ticket public status error: ${error.message}`, {
+      ticketNumber: req.params.ticketNumber,
+      error: error.stack
+    });
+
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch ticket status',
+      code: 'SERVER_ERROR'
+    });
+  }
+}
+
+/**
+ * @method getOverdueTickets
+ * @description Get all overdue tickets
+ */
+static async getOverdueTickets(req, res) {
+  try {
+    const userId = req.user.id;
+    const userRole = req.user.role;
+    
+    // Build base query
+    const query = this.buildRoleBasedQuery(userId, userRole);
+    
+    // Find overdue tickets
+    const overdueTickets = await Ticket.find({
+      ...query,
+      status: { $nin: ['Resolved', 'Closed'] },
+      $or: [
+        { 'sla.resolutionDeadline': { $lt: new Date() } },
+        { dueDate: { $lt: new Date() } }
+      ]
+    })
+      .populate('createdBy', 'firstName lastName email department')
+      .populate('assignedTo', 'firstName lastName email')
+      .populate('escalatedTo', 'firstName lastName email')
+      .sort({ 'sla.resolutionDeadline': 1 })
+      .lean();
+
+    // Enhance tickets with overdue details
+    const enhancedTickets = overdueTickets.map(ticket => ({
+      ...ticket,
+      overdueBy: this.calculateOverdueTime(ticket),
+      escalationRequired: this.isEscalationRequired(ticket),
+      suggestedActions: this.getSuggestedActions(ticket)
+    }));
+
+    // Get overdue statistics
+    const overdueStats = {
+      total: overdueTickets.length,
+      byPriority: {},
+      byDepartment: {},
+      avgOverdueTime: 0
+    };
+
+    overdueTickets.forEach(ticket => {
+      // Count by priority
+      overdueStats.byPriority[ticket.priority] = (overdueStats.byPriority[ticket.priority] || 0) + 1;
+      
+      // Count by department
+      if (ticket.department) {
+        overdueStats.byDepartment[ticket.department] = (overdueStats.byDepartment[ticket.department] || 0) + 1;
+      }
+    });
+
+    res.json({
+      success: true,
+      data: {
+        tickets: enhancedTickets,
+        stats: overdueStats,
+        summary: {
+          totalOverdue: overdueTickets.length,
+          criticalOverdue: overdueStats.byPriority['Critical'] || 0,
+          highOverdue: overdueStats.byPriority['High'] || 0,
+          escalationNeeded: enhancedTickets.filter(t => t.escalationRequired).length
+        }
+      }
+    });
+
+  } catch (error) {
+    logger.error(`Get overdue tickets error: ${error.message}`, {
+      userId: req.user?.id,
+      error: error.stack
+    });
+
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch overdue tickets',
+      code: 'SERVER_ERROR'
+    });
+  }
+}
+
+/**
+ * @method getSLADashboard
+ * @description Get comprehensive SLA dashboard data
+ */
+static async getSLADashboard(req, res) {
+  try {
+    const { timeframe = 'month' } = req.query;
+    
+    // Calculate date range
+    const dateRange = this.calculateDateRange(timeframe);
+    
+    // Get SLA metrics
+    const slaMetrics = await Ticket.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: dateRange.start, $lte: dateRange.end },
+          isDeleted: false
+        }
+      },
+      {
+        $facet: {
+          // Overall SLA compliance
+          overallCompliance: [
+            {
+              $group: {
+                _id: null,
+                totalTickets: { $sum: 1 },
+                slaMet: {
+                  $sum: {
+                    $cond: [
+                      { 
+                        $and: [
+                          { $ne: ['$firstResponseAt', null] },
+                          { $lte: ['$firstResponseAt', '$sla.responseDeadline'] }
+                        ]
+                      },
+                      1,
+                      0
+                    ]
+                  }
+                },
+                resolutionSlaMet: {
+                  $sum: {
+                    $cond: [
+                      { 
+                        $and: [
+                          { $eq: ['$status', 'Resolved'] },
+                          { $lte: ['$resolvedAt', '$sla.resolutionDeadline'] }
+                        ]
+                      },
+                      1,
+                      0
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          
+          // SLA compliance by priority
+          byPriority: [
+            {
+              $group: {
+                _id: '$priority',
+                total: { $sum: 1 },
+                slaMet: {
+                  $sum: {
+                    $cond: [
+                      { 
+                        $and: [
+                          { $ne: ['$firstResponseAt', null] },
+                          { $lte: ['$firstResponseAt', '$sla.responseDeadline'] }
+                        ]
+                      },
+                      1,
+                      0
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          
+          // SLA compliance by category
+          byCategory: [
+            {
+              $group: {
+                _id: '$category',
+                total: { $sum: 1 },
+                slaMet: {
+                  $sum: {
+                    $cond: [
+                      { 
+                        $and: [
+                          { $eq: ['$status', 'Resolved'] },
+                          { $lte: ['$resolvedAt', '$sla.resolutionDeadline'] }
+                        ]
+                      },
+                      1,
+                      0
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          
+          // Average response times
+          responseTimes: [
+            {
+              $match: { firstResponseAt: { $ne: null } }
+            },
+            {
+              $group: {
+                _id: null,
+                avgResponseTime: {
+                  $avg: {
+                    $divide: [
+                      { $subtract: ['$firstResponseAt', '$createdAt'] },
+                      1000 * 60 // Convert to minutes
+                    ]
+                  }
+                },
+                minResponseTime: {
+                  $min: {
+                    $divide: [
+                      { $subtract: ['$firstResponseAt', '$createdAt'] },
+                      1000 * 60
+                    ]
+                  }
+                },
+                maxResponseTime: {
+                  $max: {
+                    $divide: [
+                      { $subtract: ['$firstResponseAt', '$createdAt'] },
+                      1000 * 60
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          
+          // Average resolution times
+          resolutionTimes: [
+            {
+              $match: { resolvedAt: { $ne: null } }
+            },
+            {
+              $group: {
+                _id: null,
+                avgResolutionTime: {
+                  $avg: {
+                    $divide: [
+                      { $subtract: ['$resolvedAt', '$createdAt'] },
+                      1000 * 60 * 60 // Convert to hours
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          
+          // SLA breaches over time
+          breachesOverTime: [
+            {
+              $project: {
+                month: { $month: '$createdAt' },
+                year: { $year: '$createdAt' },
+                slaBreached: {
+                  $cond: [
+                    { 
+                      $and: [
+                        { $eq: ['$status', 'Resolved'] },
+                        { $gt: ['$resolvedAt', '$sla.resolutionDeadline'] }
+                      ]
+                    },
+                    1,
+                    0
+                  ]
+                }
+              }
+            },
+            {
+              $group: {
+                _id: { month: '$month', year: '$year' },
+                total: { $sum: 1 },
+                breaches: { $sum: '$slaBreached' }
+              }
+            },
+            { $sort: { '_id.year': 1, '_id.month': 1 } }
+          ]
+        }
+      }
+    ]);
+
+    // Process the results
+    const metrics = slaMetrics[0];
+    const overall = metrics.overallCompliance[0] || {};
+    
+    const slaDashboard = {
+      timeframe: {
+        start: dateRange.start,
+        end: dateRange.end,
+        label: timeframe
+      },
+      summary: {
+        totalTickets: overall.totalTickets || 0,
+        responseSlaCompliance: overall.totalTickets > 0 
+          ? ((overall.slaMet || 0) / overall.totalTickets) * 100 
+          : 0,
+        resolutionSlaCompliance: overall.totalTickets > 0
+          ? ((overall.resolutionSlaMet || 0) / overall.totalTickets) * 100
+          : 0,
+        avgResponseTime: metrics.responseTimes[0]?.avgResponseTime || 0,
+        avgResolutionTime: metrics.resolutionTimes[0]?.avgResolutionTime || 0
+      },
+      breakdown: {
+        byPriority: metrics.byPriority.map(item => ({
+          priority: item._id,
+          total: item.total,
+          complianceRate: item.total > 0 ? (item.slaMet / item.total) * 100 : 0
+        })),
+        byCategory: metrics.byCategory.map(item => ({
+          category: item._id,
+          total: item.total,
+          complianceRate: item.total > 0 ? (item.slaMet / item.total) * 100 : 0
+        }))
+      },
+      trends: {
+        breachesOverTime: metrics.breachesOverTime.map(item => ({
+          period: `${item._id.month}/${item._id.year}`,
+          totalTickets: item.total,
+          breaches: item.breaches,
+          breachRate: item.total > 0 ? (item.breaches / item.total) * 100 : 0
+        }))
+      }
+    };
+
+    res.json({
+      success: true,
+      data: slaDashboard
+    });
+
+  } catch (error) {
+    logger.error(`Get SLA dashboard error: ${error.message}`, {
+      error: error.stack
+    });
+
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch SLA dashboard',
+      code: 'SERVER_ERROR'
+    });
+  }
+}
+
+/**
+ * @method bulkUpdateTickets
+ * @description Bulk update multiple tickets
+ */
+static async bulkUpdateTickets(req, res) {
+  const session = await Ticket.startSession();
+  session.startTransaction();
   
+  try {
+    const { ticketIds, updates, changeReason } = req.body;
+    const userId = req.user.id;
+    const userRole = req.user.role;
+
+    if (!ticketIds || !Array.isArray(ticketIds) || ticketIds.length === 0) {
+      await session.abortTransaction();
+      session.endSession();
+      
+      return res.status(400).json({
+        success: false,
+        error: 'Ticket IDs are required',
+        code: 'VALIDATION_ERROR'
+      });
+    }
+
+    if (!updates || Object.keys(updates).length === 0) {
+      await session.abortTransaction();
+      session.endSession();
+      
+      return res.status(400).json({
+        success: false,
+        error: 'No updates provided',
+        code: 'VALIDATION_ERROR'
+      });
+    }
+
+    // Validate ticket IDs
+    const validObjectIds = ticketIds.filter(id => mongoose.Types.ObjectId.isValid(id));
+    
+    if (validObjectIds.length === 0) {
+      await session.abortTransaction();
+      session.endSession();
+      
+      return res.status(400).json({
+        success: false,
+        error: 'No valid ticket IDs provided',
+        code: 'VALIDATION_ERROR'
+      });
+    }
+
+    // Check permissions for all tickets
+    const tickets = await Ticket.find({
+      _id: { $in: validObjectIds },
+      isDeleted: false
+    }).session(session);
+
+    if (tickets.length === 0) {
+      await session.abortTransaction();
+      session.endSession();
+      
+      return res.status(404).json({
+        success: false,
+        error: 'No tickets found',
+        code: 'TICKETS_NOT_FOUND'
+      });
+    }
+
+    // Verify permissions for each ticket
+    for (const ticket of tickets) {
+      if (!this.checkEditPermission(userId, userRole, ticket)) {
+        await session.abortTransaction();
+        session.endSession();
+        
+        return res.status(403).json({
+          success: false,
+          error: `Not authorized to update ticket ${ticket.ticketNumber}`,
+          code: 'PERMISSION_DENIED'
+        });
+      }
+    }
+
+    // Apply updates to all tickets
+    const updateResults = {
+      successful: [],
+      failed: []
+    };
+
+    for (const ticket of tickets) {
+      try {
+        // Track old values
+        const oldTicket = ticket.toObject();
+        const changes = {};
+
+        // Apply allowed updates
+        const allowedUpdates = [
+          'status', 'priority', 'assignedTo', 'department', 'category',
+          'tags', 'escalationLevel'
+        ];
+
+        for (const field of allowedUpdates) {
+          if (updates[field] !== undefined && updates[field] !== ticket[field]) {
+            changes[field] = {
+              old: ticket[field],
+              new: updates[field]
+            };
+            ticket[field] = updates[field];
+          }
+        }
+
+        // Add to history if changes were made
+        if (Object.keys(changes).length > 0) {
+          ticket.history.push({
+            action: 'BULK_UPDATED',
+            performedBy: userId,
+            changes,
+            notes: changeReason || 'Bulk update',
+            timestamp: new Date()
+          });
+
+          ticket.updatedAt = new Date();
+          await ticket.save({ session });
+
+          updateResults.successful.push({
+            ticketNumber: ticket.ticketNumber,
+            changes: Object.keys(changes)
+          });
+        } else {
+          updateResults.failed.push({
+            ticketNumber: ticket.ticketNumber,
+            reason: 'No changes applied'
+          });
+        }
+      } catch (error) {
+        updateResults.failed.push({
+          ticketNumber: ticket.ticketNumber,
+          reason: error.message
+        });
+      }
+    }
+
+    // Send notifications for significant changes
+    if (updates.assignedTo || updates.status) {
+      await this.sendBulkUpdateNotifications(tickets, updates, userId, session);
+    }
+
+    // Commit transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    logger.info(`Bulk update completed by ${userId}`, {
+      userId,
+      totalTickets: tickets.length,
+      successful: updateResults.successful.length,
+      failed: updateResults.failed.length
+    });
+
+    res.json({
+      success: true,
+      data: {
+        results: updateResults,
+        summary: {
+          totalProcessed: tickets.length,
+          successful: updateResults.successful.length,
+          failed: updateResults.failed.length,
+          successRate: (updateResults.successful.length / tickets.length) * 100
+        }
+      }
+    });
+
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+
+    logger.error(`Bulk update tickets error: ${error.message}`, {
+      userId: req.user?.id,
+      error: error.stack
+    });
+
+    res.status(500).json({
+      success: false,
+      error: 'Failed to perform bulk update',
+      code: 'SERVER_ERROR'
+    });
+  }
+}
+
+// ============================================
+// ADDITIONAL HELPER METHODS
+// ============================================
+
+/**
+ * Format tickets to CSV
+ */
+static formatTicketsToCSV(tickets) {
+  const headers = [
+    'Ticket Number',
+    'Title',
+    'Description',
+    'Status',
+    'Priority',
+    'Category',
+    'Department',
+    'Created By',
+    'Created At',
+    'Assigned To',
+    'Assigned At',
+    'Resolved At',
+    'Closed At',
+    'SLA Status',
+    'Due Date',
+    'Campus',
+    'Building',
+    'Room'
+  ];
+
+  const rows = tickets.map(ticket => [
+    ticket.ticketNumber,
+    ticket.title,
+    ticket.description,
+    ticket.status,
+    ticket.priority,
+    ticket.category,
+    ticket.department,
+    ticket.createdBy ? `${ticket.createdBy.firstName} ${ticket.createdBy.lastName}` : '',
+    ticket.createdAt,
+    ticket.assignedTo ? `${ticket.assignedTo.firstName} ${ticket.assignedTo.lastName}` : '',
+    ticket.assignedAt,
+    ticket.resolvedAt,
+    ticket.closedAt,
+    this.calculateSLAStatus(ticket),
+    ticket.dueDate,
+    ticket.campus,
+    ticket.building,
+    ticket.roomNumber
+  ]);
+
+  const csvContent = [
+    headers.join(','),
+    ...rows.map(row => row.map(cell => 
+      typeof cell === 'string' ? `"${cell.replace(/"/g, '""')}"` : cell
+    ).join(','))
+  ].join('\n');
+
+  return csvContent;
+}
+
+/**
+ * Calculate overdue time
+ */
+static calculateOverdueTime(ticket) {
+  if (!ticket.sla?.resolutionDeadline && !ticket.dueDate) return null;
+  
+  const deadline = ticket.sla?.resolutionDeadline || ticket.dueDate;
+  const now = new Date();
+  const overdueMs = now - new Date(deadline);
+  
+  if (overdueMs <= 0) return null;
+  
+  const days = Math.floor(overdueMs / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((overdueMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  
+  return { days, hours };
+}
+
+/**
+ * Check if escalation is required
+ */
+static isEscalationRequired(ticket) {
+  const overdueTime = this.calculateOverdueTime(ticket);
+  if (!overdueTime) return false;
+  
+  // Escalate if overdue by more than 2 days for critical/high priority
+  if (['Critical', 'High'].includes(ticket.priority) && overdueTime.days >= 2) {
+    return true;
+  }
+  
+  // Escalate if overdue by more than 5 days for medium/low priority
+  if (['Medium', 'Low'].includes(ticket.priority) && overdueTime.days >= 5) {
+    return true;
+  }
+  
+  return false;
+}
+
+/**
+ * Calculate date range
+ */
+static calculateDateRange(timeframe) {
+  const now = new Date();
+  const start = new Date();
+  
+  switch (timeframe) {
+    case 'today':
+      start.setHours(0, 0, 0, 0);
+      break;
+    case 'week':
+      start.setDate(now.getDate() - 7);
+      break;
+    case 'month':
+      start.setMonth(now.getMonth() - 1);
+      break;
+    case 'quarter':
+      start.setMonth(now.getMonth() - 3);
+      break;
+    case 'year':
+      start.setFullYear(now.getFullYear() - 1);
+      break;
+    default:
+      start.setMonth(now.getMonth() - 1);
+  }
+  
+  return { start, end: now };
+}
+/**
+ * @method downloadAttachment
+ * @description Download ticket attachment
+ */
+static async downloadAttachment(req, res) {
+  try {
+    const { id, attachmentId } = req.params;
+    
+    const ticket = await Ticket.findOne({
+      _id: id,
+      isDeleted: false,
+      'attachments._id': attachmentId
+    });
+    
+    if (!ticket) {
+      return res.status(404).json({
+        success: false,
+        error: 'Attachment not found',
+        code: 'ATTACHMENT_NOT_FOUND'
+      });
+    }
+    
+    const attachment = ticket.attachments.id(attachmentId);
+    
+    // Check permissions
+    if (!this.checkViewPermission(req.user.id, req.user.role, ticket)) {
+      return res.status(403).json({
+        success: false,
+        error: 'Not authorized to download this attachment',
+        code: 'PERMISSION_DENIED'
+      });
+    }
+    
+    // Set download headers
+    res.setHeader('Content-Type', attachment.mimeType);
+    res.setHeader('Content-Disposition', `attachment; filename="${attachment.originalName}"`);
+    
+    // Send file (assuming files are stored in a directory)
+    // This would need to be adjusted based on your file storage solution
+    // For now, we'll send the file path
+    res.json({
+      success: true,
+      data: {
+        filename: attachment.filename,
+        originalName: attachment.originalName,
+        path: attachment.path,
+        size: attachment.size,
+        mimeType: attachment.mimeType
+      }
+    });
+    
+  } catch (error) {
+    logger.error(`Download attachment error: ${error.message}`, {
+      ticketId: req.params.id,
+      attachmentId: req.params.attachmentId,
+      error: error.stack
+    });
+    
+    res.status(500).json({
+      success: false,
+      error: 'Failed to download attachment',
+      code: 'SERVER_ERROR'
+    });
+  }
+}
   /**
    * Find related tickets
    */
@@ -1639,6 +2529,7 @@ class TicketController {
       .lean();
   }
 }
+
 
 // Export existing methods for backward compatibility
 exports.createTicket = TicketController.createTicket;

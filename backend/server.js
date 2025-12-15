@@ -2396,13 +2396,11 @@ app.get('/api/tickets', authenticateToken, async (req, res) => {
   }
 });
 
-// ============================================
-// ADDED: GET SINGLE TICKET BY ID - THIS WAS MISSING!
-// ============================================
+
 
 /**
  * @route   GET /api/tickets/:id
- * @desc    Get single ticket by ID - ADDED THIS MISSING ROUTE
+ * @desc    Get single ticket by ID - FIXED VERSION
  * @access  Private
  */
 app.get('/api/tickets/:id', authenticateToken, async (req, res) => {
@@ -2422,10 +2420,10 @@ app.get('/api/tickets/:id', authenticateToken, async (req, res) => {
       query = { ticketId: id };
     }
     
-    // Find the ticket
+    // Find the ticket with safe population
     const ticket = await Ticket.findOne(query)
-      .populate('createdBy', 'firstName lastName email role department')
-      .populate('assignedTo', 'firstName lastName email role department')
+      .populate('createdBy', 'firstName lastName email role department _id')
+      .populate('assignedTo', 'firstName lastName email role department _id')
       .populate('comments.user', 'firstName lastName role');
     
     if (!ticket) {
@@ -2436,16 +2434,86 @@ app.get('/api/tickets/:id', authenticateToken, async (req, res) => {
       });
     }
     
-    // Check permissions
-    const isOwner = ticket.createdBy._id.toString() === userId.toString();
-    const isAssigned = ticket.assignedTo && ticket.assignedTo._id.toString() === userId.toString();
-    const isAdminOrTech = ['admin', 'technician'].includes(userRole);
+    // 🔍 DEBUG: Check what's populated
+    console.log('🔍 [GET TICKET] Debug - Ticket data:', {
+      hasCreatedBy: !!ticket.createdBy,
+      createdById: ticket.createdBy?._id,
+      createdByType: typeof ticket.createdBy,
+      createdByFull: ticket.createdBy,
+      userRole,
+      userId
+    });
     
-    if (!isOwner && !isAssigned && !isAdminOrTech) {
+    // ⚠️ FIX: Safely check permissions with null checks
+    let hasPermission = false;
+    
+    // Admin can always access
+    if (userRole === 'admin') {
+      hasPermission = true;
+    }
+    // Technician can access if assigned or in their department
+   else if (userRole === 'technician') {
+  const isAssigned = ticket.assignedTo && 
+                    ticket.assignedTo._id && 
+                    ticket.assignedTo._id.toString() === userId.toString();
+  
+  const sameDepartment = req.user.department === ticket.department;
+  
+  const isUnassigned = !ticket.assignedTo;
+  
+  // Allow if: assigned to them OR same department OR unassigned
+  hasPermission = isAssigned || sameDepartment || isUnassigned;
+  
+  console.log('🔐 Technician permission check:', {
+    isAssigned,
+    sameDepartment: `${req.user.department} === ${ticket.department}`,
+    isUnassigned,
+    hasPermission,
+    ticketDepartment: ticket.department,
+    userDepartment: req.user.department
+  });
+}
+    // Staff can access tickets in their department
+    else if (userRole === 'staff') {
+      const isOwner = ticket.createdBy && 
+                     ticket.createdBy._id && 
+                     ticket.createdBy._id.toString() === userId.toString();
+      const isInDepartment = ticket.createdBy && 
+                           ticket.createdBy.department === req.user.department;
+      hasPermission = isOwner || isInDepartment;
+    }
+    // Students can only access their own tickets
+    else if (userRole === 'student') {
+      // ⚠️ FIXED: Add proper null check before accessing _id
+      if (ticket.createdBy && ticket.createdBy._id) {
+        hasPermission = ticket.createdBy._id.toString() === userId.toString();
+      } else {
+        // Log warning but don't grant access
+        console.warn(`⚠️ [GET TICKET] Ticket ${ticket.ticketId} has no createdBy field`);
+        hasPermission = false;
+      }
+    }
+    
+    console.log(`🔐 [GET TICKET] Permission check: ${hasPermission ? 'GRANTED' : 'DENIED'}`, {
+      userRole,
+      userId,
+      createdById: ticket.createdBy?._id,
+      assignedToId: ticket.assignedTo?._id,
+      sameUser: ticket.createdBy && 
+                ticket.createdBy._id && 
+                ticket.createdBy._id.toString() === userId.toString()
+    });
+    
+    if (!hasPermission) {
       return res.status(403).json({
         success: false,
         message: 'You do not have permission to view this ticket',
-        code: 'PERMISSION_DENIED'
+        code: 'PERMISSION_DENIED',
+        details: {
+          userRole,
+          ticketOwner: ticket.createdBy?._id || 'unknown',
+          ticketDepartment: ticket.createdBy?.department || 'unknown'
+        }
       });
     }
     
@@ -2471,18 +2539,24 @@ app.get('/api/tickets/:id', authenticateToken, async (req, res) => {
       attachments: ticket.attachments || [],
       comments: ticket.comments || [],
       
-      // User info
-      createdBy: {
+      // Safely format user info
+      createdBy: ticket.createdBy ? {
         _id: ticket.createdBy._id,
-        name: `${ticket.createdBy.firstName} ${ticket.createdBy.lastName}`,
+        name: `${ticket.createdBy.firstName || ''} ${ticket.createdBy.lastName || ''}`.trim(),
         email: ticket.createdBy.email,
         role: ticket.createdBy.role,
         department: ticket.createdBy.department
+      } : {
+        _id: null,
+        name: 'Unknown User',
+        email: 'unknown@bugemauniv.ac.ug',
+        role: 'unknown',
+        department: 'unknown'
       },
       
       assignedTo: ticket.assignedTo ? {
         _id: ticket.assignedTo._id,
-        name: `${ticket.assignedTo.firstName} ${ticket.assignedTo.lastName}`,
+        name: `${ticket.assignedTo.firstName || ''} ${ticket.assignedTo.lastName || ''}`.trim(),
         email: ticket.assignedTo.email,
         role: ticket.assignedTo.role,
         department: ticket.assignedTo.department
@@ -2503,7 +2577,7 @@ app.get('/api/tickets/:id', authenticateToken, async (req, res) => {
       })()
     };
     
-    console.log(`✅ [GET TICKET] Found: ${ticket.ticketId}`);
+    console.log(`✅ [GET TICKET] Found: ${ticket.ticketId}, Access: GRANTED`);
     
     res.json({
       success: true,
@@ -2512,6 +2586,15 @@ app.get('/api/tickets/:id', authenticateToken, async (req, res) => {
     
   } catch (error) {
     console.error('❌ [GET TICKET ERROR]', error);
+    
+    // Handle specific CastError for invalid ObjectId
+    if (error.name === 'CastError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid ticket ID format',
+        code: 'INVALID_TICKET_ID'
+      });
+    }
     
     res.status(500).json({
       success: false,
@@ -2567,6 +2650,407 @@ app.put('/api/tickets/:id', authenticateToken, async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Server error updating ticket'
+    });
+  }
+});
+
+/**
+ * @route   GET /api/tickets/:id/comments
+ * @desc    Get comments for a specific ticket
+ * @access  Private
+ */
+app.get('/api/tickets/:id/comments', authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+    const userRole = req.user.role;
+    
+    console.log(`💬 [GET COMMENTS] Request for ticket: ${id} by ${req.user.email}`);
+    
+    // Find ticket with comments populated
+    const ticket = await Ticket.findById(id)
+      .populate('comments.user', 'firstName lastName email role')
+      .select('comments createdBy assignedTo department');
+    
+    if (!ticket) {
+      return res.status(404).json({
+        success: false,
+        message: 'Ticket not found'
+      });
+    }
+    
+    // Check permissions
+    const isOwner = ticket.createdBy.toString() === userId.toString();
+    const isAssigned = ticket.assignedTo && ticket.assignedTo.toString() === userId.toString();
+    const isAdminOrTech = ['admin', 'technician'].includes(userRole);
+    const sameDepartment = ticket.department === req.user.department;
+    
+    let hasPermission = false;
+    
+    if (userRole === 'admin') {
+      hasPermission = true;
+    } else if (userRole === 'technician') {
+      hasPermission = isAssigned || sameDepartment || !ticket.assignedTo;
+    } else if (userRole === 'staff') {
+      hasPermission = isOwner || sameDepartment;
+    } else if (userRole === 'student') {
+      hasPermission = isOwner;
+    }
+    
+    if (!hasPermission) {
+      return res.status(403).json({
+        success: false,
+        message: 'You do not have permission to view comments for this ticket'
+      });
+    }
+    
+    // Filter internal comments for non-staff
+    let filteredComments = ticket.comments || [];
+    if (!['admin', 'technician'].includes(userRole)) {
+      filteredComments = filteredComments.filter(comment => !comment.isInternal);
+    }
+    
+    // Sort by latest first
+    filteredComments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    
+    console.log(`✅ [GET COMMENTS] Returning ${filteredComments.length} comments for ticket ${id}`);
+    
+    res.json({
+      success: true,
+      data: {
+        comments: filteredComments,
+        count: filteredComments.length,
+        internalCount: (ticket.comments || []).filter(c => c.isInternal).length
+      }
+    });
+    
+  } catch (error) {
+    console.error('❌ [GET COMMENTS ERROR]', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve comments'
+    });
+  }
+});
+
+/**
+ * @route   POST /api/tickets/:id/comments
+ * @desc    Add a comment to a ticket
+ * @access  Private
+ */
+app.post('/api/tickets/:id/comments', authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { message, isInternal = false } = req.body;
+    
+    if (!message || message.trim().length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Comment message is required'
+      });
+    }
+    
+    // Find ticket
+    const ticket = await Ticket.findById(id);
+    
+    if (!ticket) {
+      return res.status(404).json({
+        success: false,
+        message: 'Ticket not found'
+      });
+    }
+    
+    // Check if user can add internal comments
+    if (isInternal && !['admin', 'technician'].includes(req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        message: 'Only staff can add internal comments'
+      });
+    }
+    
+    // Add comment
+    const newComment = {
+      _id: new mongoose.Types.ObjectId(),
+      user: req.user._id,
+      message: message.trim(),
+      isInternal,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    
+    ticket.comments.push(newComment);
+    await ticket.save();
+    
+    // Populate user info
+    await ticket.populate('comments.user', 'firstName lastName email role');
+    const addedComment = ticket.comments.find(c => c._id.toString() === newComment._id.toString());
+    
+    console.log(`💬 [ADD COMMENT] Added to ticket ${ticket.ticketId} by ${req.user.email}`);
+    
+    res.status(201).json({
+      success: true,
+      message: 'Comment added successfully',
+      data: {
+        comment: addedComment
+      }
+    });
+    
+  } catch (error) {
+    console.error('❌ [ADD COMMENT ERROR]', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to add comment'
+    });
+  }
+});
+/**
+ * @route   GET /api/tickets/:id/activities
+ * @desc    Get activity log for a ticket
+ * @access  Private
+ */
+app.get('/api/tickets/:id/activities', authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+    const userRole = req.user.role;
+    
+    console.log(`📝 [GET ACTIVITIES] Request for ticket: ${id} by ${req.user.email}`);
+    
+    // Find ticket
+    const ticket = await Ticket.findById(id)
+      .select('history createdBy assignedTo department status priority updatedAt');
+    
+    if (!ticket) {
+      return res.status(404).json({
+        success: false,
+        message: 'Ticket not found'
+      });
+    }
+    
+    // Check permissions (same as comments)
+    const isOwner = ticket.createdBy.toString() === userId.toString();
+    const isAssigned = ticket.assignedTo && ticket.assignedTo.toString() === userId.toString();
+    const isAdminOrTech = ['admin', 'technician'].includes(userRole);
+    const sameDepartment = ticket.department === req.user.department;
+    
+    let hasPermission = false;
+    
+    if (userRole === 'admin') {
+      hasPermission = true;
+    } else if (userRole === 'technician') {
+      hasPermission = isAssigned || sameDepartment || !ticket.assignedTo;
+    } else if (userRole === 'staff') {
+      hasPermission = isOwner || sameDepartment;
+    } else if (userRole === 'student') {
+      hasPermission = isOwner;
+    }
+    
+    if (!hasPermission) {
+      return res.status(403).json({
+        success: false,
+        message: 'You do not have permission to view activities for this ticket'
+      });
+    }
+    
+    // Generate activities from ticket data if no history
+    let activities = [];
+    
+    if (ticket.history && ticket.history.length > 0) {
+      // Use existing history
+      activities = ticket.history.map(item => ({
+        action: item.action,
+        description: getActivityDescription(item),
+        user: item.changedBy ? { _id: item.changedBy, name: 'System' } : { name: 'System' },
+        timestamp: item.changedAt,
+        field: item.field,
+        oldValue: item.oldValue,
+        newValue: item.newValue,
+        reason: item.reason
+      }));
+    } else {
+      // Generate basic activities from ticket fields
+      activities = generateBasicActivities(ticket);
+    }
+    
+    // Sort by latest first
+    activities.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    
+    console.log(`✅ [GET ACTIVITIES] Returning ${activities.length} activities for ticket ${id}`);
+    
+    res.json({
+      success: true,
+      data: {
+        activities,
+        count: activities.length
+      }
+    });
+    
+  } catch (error) {
+    console.error('❌ [GET ACTIVITIES ERROR]', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve activities'
+    });
+  }
+});
+
+// Helper functions
+function getActivityDescription(activity) {
+  const fieldLabels = {
+    status: 'Status',
+    priority: 'Priority',
+    assignedTo: 'Assignment',
+    category: 'Category',
+    department: 'Department',
+    title: 'Title',
+    description: 'Description'
+  };
+  
+  const field = fieldLabels[activity.field] || activity.field;
+  
+  switch (activity.action) {
+    case 'CREATED':
+      return `Ticket created`;
+    case 'STATUS_UPDATE':
+      return `Status changed from "${activity.oldValue || 'N/A'}" to "${activity.newValue}"`;
+    case 'ASSIGNED':
+      if (activity.oldValue && activity.newValue) {
+        return `Reassigned from User ${activity.oldValue} to User ${activity.newValue}`;
+      } else if (activity.newValue) {
+        return `Assigned to User ${activity.newValue}`;
+      } else {
+        return `Unassigned`;
+      }
+    case 'PRIORITY_UPDATE':
+      return `Priority changed from "${activity.oldValue || 'N/A'}" to "${activity.newValue}"`;
+    case 'COMMENT_ADDED':
+      return `Comment added`;
+    default:
+      return `${activity.action} on ${field}`;
+  }
+}
+
+function generateBasicActivities(ticket) {
+  const activities = [];
+  
+  // Ticket creation
+  activities.push({
+    action: 'CREATED',
+    description: 'Ticket created',
+    user: { _id: ticket.createdBy, name: 'Creator' },
+    timestamp: ticket.createdAt,
+    field: 'status',
+    oldValue: null,
+    newValue: 'open'
+  });
+  
+  // Status changes
+  if (ticket.status !== 'open') {
+    activities.push({
+      action: 'STATUS_UPDATE',
+      description: `Status changed to ${ticket.status}`,
+      user: { name: 'System' },
+      timestamp: ticket.updatedAt,
+      field: 'status',
+      oldValue: 'open',
+      newValue: ticket.status
+    });
+  }
+  
+  // Add more basic activities as needed
+  return activities;
+}
+/**
+ * @route   GET /api/tickets/technicians/available
+ * @desc    Get available technicians for assignment
+ * @access  Private (Admin/Technician)
+ */
+app.get('/api/tickets/technicians/available', authenticateToken, async (req, res) => {
+  try {
+    const { department } = req.query;
+    
+    console.log(`👨‍💼 [GET TECHNICIANS] Request from ${req.user.email}, department: ${department || 'all'}`);
+    
+    // Only admins and technicians can view technicians
+    if (!['admin', 'technician'].includes(req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        message: 'You do not have permission to view technicians'
+      });
+    }
+    
+    // Build query for active technicians/admins
+    const query = {
+      role: { $in: ['technician', 'admin'] },
+      isActive: true,
+      isEmailVerified: true
+    };
+    
+    if (department && department !== 'all') {
+      query.department = department;
+    }
+    
+    // Get technicians
+    const technicians = await User.find(query)
+      .select('_id firstName lastName email role department phone campus isActive')
+      .sort({ firstName: 1, lastName: 1 });
+    
+    // Get current workload for each technician
+    const techniciansWithWorkload = await Promise.all(
+      technicians.map(async (tech) => {
+        // Count assigned active tickets
+        const assignedTickets = await Ticket.countDocuments({
+          assignedTo: tech._id,
+          status: { $nin: ['resolved', 'closed'] }
+        });
+        
+        // Count tickets created today (recent activity)
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        const recentTickets = await Ticket.countDocuments({
+          assignedTo: tech._id,
+          updatedAt: { $gte: today }
+        });
+        
+        return {
+          _id: tech._id,
+          name: `${tech.firstName} ${tech.lastName}`,
+          email: tech.email,
+          role: tech.role,
+          department: tech.department,
+          phone: tech.phone || 'Not provided',
+          campus: tech.campus || 'BU',
+          isActive: tech.isActive,
+          workload: assignedTickets,
+          recentActivity: recentTickets,
+          availability: assignedTickets < 5 ? 'Available' : 
+                       assignedTickets < 10 ? 'Moderate' : 'Busy',
+          availabilityScore: Math.max(0, 10 - assignedTickets) // 0-10 scale
+        };
+      })
+    );
+    
+    // Sort by availability (most available first)
+    techniciansWithWorkload.sort((a, b) => b.availabilityScore - a.availabilityScore);
+    
+    console.log(`✅ [GET TECHNICIANS] Found ${techniciansWithWorkload.length} technicians`);
+    
+    res.json({
+      success: true,
+      data: techniciansWithWorkload,
+      count: techniciansWithWorkload.length,
+      metadata: {
+        timestamp: new Date().toISOString(),
+        departmentFilter: department || 'all'
+      }
+    });
+    
+  } catch (error) {
+    console.error('❌ [GET TECHNICIANS ERROR]', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve technicians'
     });
   }
 });
